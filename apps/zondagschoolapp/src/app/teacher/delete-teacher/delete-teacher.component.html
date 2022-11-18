@@ -1,0 +1,49 @@
+<div *ngIf="this.teacher" class="wrapper">
+
+    <div class="row border-bottom mb-3 ms-4">
+        <h1>Teacher '{{teacher.username}}'</h1>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-3 text-end">
+            <p><b>Username : </b></p>
+            <p><b>Email Address : </b></p>
+        </div>
+        <div class="col">
+            <p>{{teacher.username}}</p>
+            <p>{{teacher.email}}</p>
+        </div>
+    </div>
+
+    <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"
+        id="deleteTeacherInput">Delete Teacher</button>
+    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Back</button>
+
+    <div id="deleteTeacherModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete '{{this.teacher.username}}'</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button (click)="deleteTeacher()" routerLink="/teacher" data-bs-dismiss="modal" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var myModal = document.getElementById('updateTeacherModal')
+        var myInput = document.getElementById('updateTeacherInput')
+        let username = document.getElementById('')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
+</div>

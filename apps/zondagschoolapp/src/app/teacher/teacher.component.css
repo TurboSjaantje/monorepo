@@ -1,0 +1,40 @@
+:root {
+    --firstcolor: #E0806C;
+    --secondcolor: #614F4C;
+    --thirdcolor: #E6BBB3;
+    --fourthcolor: #AD6253;
+    --fifthcolor: #61372F;
+}
+
+.table-container {
+    box-shadow: 10px 10px 5px -5px lightgray;
+}
+
+table th,td {
+    padding: 1rem;
+}
+
+.table-container table tbody tr th,
+td {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.table-container table tbody a tr td,th:hover {
+    cursor: pointer;
+}
+
+.table-container table tbody a tr th,td:hover {
+    cursor: pointer;
+}
+
+
+.btn-primary {
+    background-color: var(--thirdcolor);
+    border: 1px solid var(--thirdcolor);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border: 1px solid black;
+}

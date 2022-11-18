@@ -1,0 +1,10 @@
+footer {
+    float: bottom;
+    bottom: 0;
+}
+
+.container{
+    width: 98vw;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+}

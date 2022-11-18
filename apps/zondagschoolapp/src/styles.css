@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --firstcolor: #E0806C;
+    --secondcolor: #614F4C;
+    --thirdcolor: #E6BBB3;
+    --fourthcolor: #AD6253;
+    --fifthcolor: #61372F;
+}
+    
+p {
+    font-size: 20px;
+}
+
+.text-muted{
+    font-size: 15px;
+}
+
+.btn-primary {
+    background-color: var(--firstcolor);
+    color: black;
+    border: 1px solid var(--firstcolor);
+}
+
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}

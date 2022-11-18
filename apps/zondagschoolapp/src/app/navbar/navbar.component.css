@@ -1,0 +1,13 @@
+:root {
+    --firstcolor: #E0806C;
+    --secondcolor: #614F4C;
+    --thirdcolor: #E6BBB3;
+    --fourthcolor: #AD6253;
+    --fifthcolor: #61372F;
+}
+    
+
+.navbar {
+    background-color: var(--firstcolor);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}

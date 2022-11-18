@@ -1,0 +1,42 @@
+<!-- Title -->
+<div class="row mb-2">
+    <h1>Teachers</h1>
+</div>
+
+<!-- Tabel -->
+<div class="table-container mb-3">
+    <table class="table table-striped">
+        <thead>
+            <tr scope="row">
+                <th style="width: 10%;" scope="col">#</th>
+                <th style="width: 37.5%;" scope="col">Username</th>
+                <th style="width: 36.5%;" scope="col">Email address</th>
+                <th style="width: 16%;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr routerLink="read/{{teacher.id}}" class="align-items-center justify-content-center"
+                *ngFor="let teacher of teachers; let i = index">
+                <th scope="row">{{ i }}</th>
+                <td>
+                    {{ teacher.username }}
+                </td>
+                <td>{{ teacher.email }}</td>
+                <td id="lastcolumn">
+                    <button class="btn btn-primary me-2" routerLink="edit/{{teacher.id}}"><img
+                            src="../../../assets/images/icons8-pencil-90.png" width="25px" height="25px"></button>
+                    <button class="btn btn-primary" routerLink="delete/{{teacher.id}}"><img src="../../../assets/images/icons8-remove-90.png" width="25px"
+                            height="25px"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- New Teacher -->
+<div class="row mb-2">
+    <h2>New Teacher</h2>
+</div>
+
+<zondagschoolapp-create-teacher></zondagschoolapp-create-teacher>

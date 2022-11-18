@@ -1,0 +1,30 @@
+:root {
+    --firstcolor: #E0806C;
+    --secondcolor: #614F4C;
+    --thirdcolor: #E6BBB3;
+    --fourthcolor: #AD6253;
+    --fifthcolor: #61372F;
+}
+
+.table-container {
+    width: 98vw;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 10px 10px 5px -5px lightgray;
+}
+
+.table-container table tbody tr th,td {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.btn-primary {
+    background-color: var(--thirdcolor);
+    border: 1px solid var(--thirdcolor);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border: 1px solid black;
+}

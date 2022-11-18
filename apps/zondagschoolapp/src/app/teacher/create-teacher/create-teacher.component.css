@@ -1,0 +1,24 @@
+:root {
+    --firstcolor: #E0806C;
+    --secondcolor: #614F4C;
+    --thirdcolor: #E6BBB3;
+    --fourthcolor: #AD6253;
+    --fifthcolor: #61372F;
+}
+
+.create-teacher-container{
+    background: rgba(97, 79, 76, .1);
+    border-radius: 0.5rem;
+}
+
+.btn-secondary{
+    background-color: var(--thirdcolor);
+    border: 1px solid var(--thirdcolor);
+    color: black;
+}
+
+.btn-secondary:hover{
+    border: 1px solid black;
+    background-color: transparent;
+    color: black;
+}

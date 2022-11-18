@@ -1,0 +1,17 @@
+<div class="wrapper p-4" *ngIf="teacher">
+
+    <div class="row border-bottom mb-3">
+        <h1>Viewing teacher '{{teacher.username}}'</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-3 text-end">
+            <p><b>Username : </b></p>
+            <p><b>Email Address : </b></p>
+        </div>
+        <div class="col">
+            <p>{{teacher.username}}</p>
+            <p>{{teacher.email}}</p>
+        </div>
+    </div>
+
+</div>
