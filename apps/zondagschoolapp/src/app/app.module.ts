@@ -17,6 +17,7 @@ import { SpecialityComponent } from './speciality/speciality.component';
 import { AboutComponent } from './about/about.component';
 import { ClassComponent } from './class/class.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     SpecialityComponent,
     AboutComponent,
     ClassComponent,
+    StudentComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

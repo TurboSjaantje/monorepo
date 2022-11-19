@@ -1,0 +1,19 @@
+:root {
+    --firstcolor: #E0806C;
+    --secondcolor: #614F4C;
+    --thirdcolor: #E6BBB3;
+    --fourthcolor: #AD6253;
+    --fifthcolor: #61372F;
+}
+
+.home-button {
+    background-color: var(--firstcolor);
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.home-button:hover {
+    background-color: transparent;
+    border-radius: 1rem;
+    cursor: pointer;
+}

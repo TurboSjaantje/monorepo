@@ -9,15 +9,20 @@ import { AboutComponent } from './about/about.component';
 import { ReadTeacherComponent } from './teacher/read-teacher/read-teacher.component';
 import { CreateTeacherComponent } from './teacher/create-teacher/create-teacher.component';
 import { DeleteTeacherComponent } from './teacher/delete-teacher/delete-teacher.component';
+import { StudentComponent } from './student/student.component';
 
 const routes: Route[] = [
 
+  //Default route
+  { path: "", component: HomeComponent},
+
   //Homepages
-  { path: "home", component: HomeComponent },
+  { path: "home" , component: HomeComponent },
   { path: "teacher", component: TeacherComponent },
   { path: "class", component: ClassComponent },
   { path: "speciality", component: SpecialityComponent },
   { path: "about", component: AboutComponent },
+  { path: "student", component: StudentComponent},
 
   //Edit Teacher
   { path: "teacher/edit/:id", component: UpdateTeacherComponent },

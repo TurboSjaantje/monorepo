@@ -1,29 +1,66 @@
-<div class="wrapper p-4" *ngIf="teacher">
-
+<div class="wrapper p-4 mb-5" *ngIf="teacher">
     <div class="row border-bottom mb-3">
         <h1>Viewing teacher '{{this.teacher.firstName}} {{this.teacher.lastName}}'</h1>
     </div>
-    <div class="row mb-4">
-        <div class="col-sm-3 text-end">
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>Name : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.firstName}} {{this.teacher.lastName}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>Email Address : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.emailAddress}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>Birthday : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacherBirthDate}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>City : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.city}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>Street : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.street}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>Housenumber : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.houseNumber}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
             <p><b>Postalcode : </b></p>
         </div>
-        <div class="col">
-            <p>{{this.teacher.firstName}} {{this.teacher.lastName}}</p>
-            <p>{{this.teacher.emailAddress}}</p>
-            <p>{{this.teacherBirthDate}}</p>
-            <p>{{this.teacher.city}}</p>
-            <p>{{this.teacher.street}}</p>
-            <p>{{this.teacher.houseNumber}}</p>
+        <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.postalCode}}</p>
         </div>
     </div>
-
-    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Back</button>
-
+    <div class="row">
+        <div class="col-md-2 col-sm-6 ms-auto">
+            <button class="btn btn-secondary mt-2 px-4" routerLink="/teacher">Back</button>
+        </div>
+    </div>
 </div>
