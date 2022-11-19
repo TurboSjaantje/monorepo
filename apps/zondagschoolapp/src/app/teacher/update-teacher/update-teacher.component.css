@@ -1,0 +1,12 @@
+.btn-primary {
+    background-color: var(--firstcolor);
+    color: black;
+    border: 1px solid var(--firstcolor);
+}
+
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+}

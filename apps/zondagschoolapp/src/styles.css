@@ -6,7 +6,7 @@
     --fifthcolor: #61372F;
 }
     
-p {
+p, .p {
     font-size: 20px;
 }
 

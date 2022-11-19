@@ -1,10 +1,21 @@
 export class Teacher {
-    id: string | undefined;
-    username: string | undefined;
-    email: string | undefined;
+    emailAddress: string | undefined;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    birthDate: Date | undefined;
+    city: string | undefined;
+    street: string | undefined;
+    houseNumber: number | undefined;
+    postalCode: string | undefined;
 
-    constructor(username: string, email: string) {
-        this.email = email;
-        this.username = username;
+    constructor(emailAddress: string, firstName: string, lastName: string, birthDate: Date, city: string, street: string, houseNumber: number, postalCode: string) {
+        this.emailAddress = emailAddress;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
     }
 }

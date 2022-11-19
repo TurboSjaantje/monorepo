@@ -1,16 +1,26 @@
 <div *ngIf="this.teacher" class="wrapper">
 
     <div class="row border-bottom mb-3 ms-4">
-        <h1>Teacher '{{teacher.username}}'</h1>
+        <h1>Deleting teacher '{{this.teacher.firstName}} {{this.teacher.lastName}}'</h1>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-4">
         <div class="col-sm-3 text-end">
-            <p><b>Username : </b></p>
+            <p><b>Name : </b></p>
             <p><b>Email Address : </b></p>
+            <p><b>Birthday : </b></p>
+            <p><b>City : </b></p>
+            <p><b>Street : </b></p>
+            <p><b>Housenumber : </b></p>
+            <p><b>Postalcode : </b></p>
         </div>
         <div class="col">
-            <p>{{teacher.username}}</p>
-            <p>{{teacher.email}}</p>
+            <p>{{this.teacher.firstName}} {{this.teacher.lastName}}</p>
+            <p>{{this.teacher.emailAddress}}</p>
+            <p>{{this.teacherBirthDate}}</p>
+            <p>{{this.teacher.city}}</p>
+            <p>{{this.teacher.street}}</p>
+            <p>{{this.teacher.houseNumber}}</p>
+            <p>{{this.teacher.postalCode}}</p>
         </div>
     </div>
 
@@ -26,7 +36,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete '{{this.teacher.username}}'</p>
+                    <p>Are you sure you want to delete '{{this.teacher.firstName}} {{this.teacher.lastName}}'</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

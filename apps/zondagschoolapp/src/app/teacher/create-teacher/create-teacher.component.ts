@@ -12,8 +12,14 @@ import { Validators } from '@angular/forms';
 export class CreateTeacherComponent implements OnInit {
 
   teacherForm = this.fb.group({
-    username: ['', Validators.required],
-    email: ['', Validators.required]
+    emailAddress: ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    birthDate: ['', Validators.required],
+    city: ['', Validators.required],
+    street: ['', Validators.required],
+    houseNumber: [0, Validators.required],
+    postalCode: ['', Validators.required]
   });
 
   constructor(private teacherService: TeacherService, private fb: FormBuilder) {
@@ -21,15 +27,20 @@ export class CreateTeacherComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   createTeacher() {
-    let username = this.teacherForm.value.username;
-    let email = this.teacherForm.value.email;
+    let emailAddress = this.teacherForm.value.emailAddress;
+    let firstName = this.teacherForm.value.firstName;
+    let lastName = this.teacherForm.value.lastName;
+    let birthDate = this.teacherForm.value.birthDate;
+    let city = this.teacherForm.value.city;
+    let street = this.teacherForm.value.street;
+    let houseNumber = this.teacherForm.value.houseNumber;
+    let postalCode = this.teacherForm.value.postalCode;
 
-    if (username != null && email != null) {
-      this.teacherService.createTeacher(new Teacher(username, email));
+    if (emailAddress && firstName && lastName && birthDate && city && street && houseNumber && postalCode) {
+      this.teacherService.createTeacher(new Teacher(emailAddress, firstName, lastName, new Date(birthDate), city, street, houseNumber, postalCode));
     }
 
     this.teacherForm.reset();

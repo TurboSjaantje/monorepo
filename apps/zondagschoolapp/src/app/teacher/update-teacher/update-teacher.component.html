@@ -1,20 +1,37 @@
 <div *ngIf="this.teacher" class="wrapper">
     <div class="row border-bottom mb-4">
-        <h1>Update Teacher '{{this.teacher.username}}'</h1>
+        <h1>Update Teacher '{{this.teacher.firstName}} {{this.teacher.lastName}}'</h1>
     </div>
 
     <form [formGroup]="teacherForm" (ngSubmit)="updateTeacher()">
 
-        <label class="form-label" for="username">Username: </label>
-        <input class="form-control mb-2" id="username" [value]="this.teacher.username" maxlength="20" type="text"
-            formControlName="username">
+        <label class="form-label" for="emailAddress">Email Address: </label>
+        <input class="form-control mb-2" id="emailAddress" type="text" formControlName="emailAddress">
 
-        <label class="form-label" for="name">Email Address: </label>
-        <input class="form-control mb-2" id="email" type="text" formControlName="email">
+        <label class="form-label" for="firstName">First Name: </label>
+        <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
+
+        <label class="form-label" for="lastName">Last Name: </label>
+        <input class="form-control mb-2" id="lastName" type="text" formControlName="lastName">
+
+        <label class="form-label" for="birthDate">Birthdate: </label>
+        <input class="form-control mb-2" id="birthDate" type="date" value="2018-07-22" formControlName="birthDate">
+
+        <label class="form-label" for="city">City: </label>
+        <input class="form-control mb-2" id="city" type="text" formControlName="city">
+
+        <label class="form-label" for="street">Street: </label>
+        <input class="form-control mb-2" id="street" type="text" formControlName="street">
+
+        <label class="form-label" for="houseNumber">Housenumber: </label>
+        <input class="form-control mb-2" id="houseNumber" type="number" formControlName="houseNumber">
+
+        <label class="form-label" for="postalCode">Postal Code: </label>
+        <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
 
         <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Complete the form to enable button.</p>
 
-        <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#updateTeacherModal"
+        <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#updateTeacherModal"
             id="updateTeacherInput" [disabled]="!teacherForm.valid">Update Teacher</button>
 
         <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Back</button>
@@ -28,12 +45,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to udpate '{{this.teacher.username}}'</p>
+                        <p>Are you sure you want to udpate '{{this.teacher.firstName}} {{this.teacher.lastName}}'</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"
-                            data-bs-dismiss="modal">Close</button>
-                        <button type="submit" routerLink="/teacher" data-bs-dismiss="modal" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" routerLink="/teacher" data-bs-dismiss="modal" class="btn btn-primary">Save
+                            changes</button>
                     </div>
                 </div>
             </div>

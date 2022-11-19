@@ -13,6 +13,7 @@ export class ReadTeacherComponent implements OnInit {
 
   teacherId: string | null | undefined;
   teacher: Teacher | undefined;
+  teacherBirthDate: string | undefined;
 
   constructor(
     private teacherService: TeacherService,
@@ -26,6 +27,7 @@ export class ReadTeacherComponent implements OnInit {
       if (this.teacherId) {
         console.log("teacher exists with id: " + this.teacherId);
         this.teacher = this.teacherService.getTeacherById(this.teacherId);
+        this.teacherBirthDate = this.teacher.birthDate?.toDateString();
       } else {
         console.log("teacher does not exist with id: " + this.teacherId);
       }

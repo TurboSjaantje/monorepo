@@ -11,19 +11,54 @@ export class TeacherService {
 
   teachers: Teacher[] = [
     {
-      id: "12345-123-12",
-      username: "robinschellius",
-      email: "r.schellius@avans.nl"
+      emailAddress: "MarliesvanderHoek@armyspy.com",
+      firstName: "Marlies",
+      lastName: "van der Hoek",
+      birthDate: new Date(1964, 9, 6),
+      city: "Amsterdam",
+      street: "Schaepmanstraat",
+      houseNumber: 84,
+      postalCode: "1051 JJ"
     },
     {
-      id: "12345-123-13",
-      username: "dionkoeze",
-      email: "d.koeze@avans.nl"
+      emailAddress: "HelenevanderKamp@armyspy.com",
+      firstName: "Helene",
+      lastName: "van der Kamp",
+      birthDate: new Date(1970, 7, 24),
+      city: "Waspik",
+      street: "Van Gentstraat",
+      houseNumber: 87,
+      postalCode: "5165 CV"
     },
     {
-      id: "12345-123-14",
-      username: "eefjegijzen",
-      email: "e.gijzen@avans.nl"
+      emailAddress: "BobbyVerbeet@armyspy.com",
+      firstName: "Bobby",
+      lastName: "Verbeet",
+      birthDate: new Date(1965, 2, 10),
+      city: "Velp",
+      street: "Alteveer",
+      houseNumber: 68,
+      postalCode: "6881 BG"
+    },
+    {
+      emailAddress: "JanneterBrugge@armyspy.com",
+      firstName: "Janne",
+      lastName: "ter Brugge",
+      birthDate: new Date(1968, 1, 24),
+      city: "Geleen",
+      street: "Hoge Kanaalweg",
+      houseNumber: 27,
+      postalCode: "6167 RJ"
+    },
+    {
+      emailAddress: "IrenaMolenkamp@teleworm.us",
+      firstName: "Irena",
+      lastName: "Molenkamp",
+      birthDate: new Date(19676, 2, 12),
+      city: "Gorredijk",
+      street: "Watse Eelkesstrjitte",
+      houseNumber: 75,
+      postalCode: "8401 RG"
     },
   ]
 
@@ -35,42 +70,36 @@ export class TeacherService {
     return this.teachers;
   }
 
-  getTeacherById(teacherid: string): Teacher {
-    return this.teachers.filter(t => t.id == teacherid)[0];
+  getTeacherById(teacherEmail: string): Teacher {
+    return this.teachers.filter(t => t.emailAddress == teacherEmail)[0];
   }
 
   createTeacher(newTeacher: Teacher) {
-    newTeacher.id = this.getRandomInt(11111, 99999) + "-"
-      + this.getRandomInt(111, 999) + "-"
-      + this.getRandomInt(11, 99);
-
-    while (this.teachers.filter(t => t.id == newTeacher.id)[0] != null) {
-      newTeacher.id = this.getRandomInt(11111, 99999) + "-"
-        + this.getRandomInt(111, 999) + "-"
-        + this.getRandomInt(11, 99);
+    if (this.teachers.filter(t => t.emailAddress == newTeacher.emailAddress)[0] == null){
+      this.teachers.push(newTeacher);
+    } else {
+      console.log("error");
     }
-
-    this.teachers.push(newTeacher);
   }
-  
+
   updateTeacher(oldTeacher: Teacher, newTeacher: Teacher) {
     for (const teacher of this.teachers) {
-      if (teacher.id == oldTeacher.id) {
-        teacher.email = newTeacher.email;
-        teacher.username = newTeacher.username;
+      if (teacher.emailAddress == oldTeacher.emailAddress) {
+        teacher.emailAddress = newTeacher.emailAddress;
+        teacher.firstName = newTeacher.firstName;
+        teacher.lastName = newTeacher.lastName;
+        teacher.birthDate = newTeacher.birthDate;
+        teacher.city = newTeacher.city;
+        teacher.street = newTeacher.street;
+        teacher.houseNumber = newTeacher.houseNumber;
+        teacher.postalCode = newTeacher.postalCode;
       }
     }
   }
 
   deleteTeacher(teacher: Teacher) {
-    const teacherIndex = this.teachers.findIndex(t => t.id === teacher.id);
+    const teacherIndex = this.teachers.findIndex(t => t.emailAddress === teacher.emailAddress);
     this.teachers.splice(teacherIndex, 1);
-  }
-
-  getRandomInt(min: number, max: number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
   }
 
 }
