@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Teacher } from '../../models/teacher.model';
+import { Teacher } from '../teacher.model';
 import { TeacherService } from '../teacher.service';
 import { Validators } from '@angular/forms';
 

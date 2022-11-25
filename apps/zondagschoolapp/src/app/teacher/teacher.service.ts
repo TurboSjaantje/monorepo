@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UnsubscriptionErrorCtor } from 'rxjs/internal/util/UnsubscriptionError';
 import { arrayBuffer } from 'stream/consumers';
-import { Teacher } from '../models/teacher.model';
+import { Teacher } from './teacher.model';
 
 @Injectable({
   providedIn: 'root'

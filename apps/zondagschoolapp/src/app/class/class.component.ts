@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ClassService } from './class.service';
 
 @Component({
   selector: 'zondagschoolapp-class',
@@ -6,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./class.component.css'],
 })
 export class ClassComponent implements OnInit {
-  constructor() {}
+  classes: Class[] | undefined;
 
-  ngOnInit(): void {}
+  constructor(private classService: ClassService) { }
+
+  ngOnInit(): void { 
+    this.classes = this.classService.
+  }
 }

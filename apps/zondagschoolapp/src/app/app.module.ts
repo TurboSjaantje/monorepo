@@ -18,6 +18,10 @@ import { AboutComponent } from './about/about.component';
 import { ClassComponent } from './class/class.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StudentComponent } from './student/student.component';
+import { CreateClassComponent } from './class/create-class/create-class.component';
+import { ReadClassComponent } from './class/read-class/read-class.component';
+import { UpdateClassComponent } from './class/update-class/update-class.component';
+import { DeleteClassComponent } from './class/delete-class/delete-class.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,10 @@ import { StudentComponent } from './student/student.component';
     AboutComponent,
     ClassComponent,
     StudentComponent,
+    CreateClassComponent,
+    ReadClassComponent,
+    UpdateClassComponent,
+    DeleteClassComponent,
   ],
   imports: [
     BrowserModule,
