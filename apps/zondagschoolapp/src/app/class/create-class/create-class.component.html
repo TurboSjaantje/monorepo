@@ -1,1 +1,31 @@
-<p>create-class works!</p>
+<div *ngIf="this.teachers">
+
+    <form [formGroup]="classForm" (ngSubmit)="createClass()">
+
+        <label class="form-label" for="name">Name: </label>
+        <input class="form-control mb-2" id="name" type="text" formControlName="name">
+
+        <label class="form-label" for="age">Age: </label>
+        <input class="form-control mb-2" id="age" type="number" formControlName="age">
+
+        <label class="form-label" for="time">Time: </label>
+        <input class="form-control mb-2" id="time" type="time" formControlName="time">
+
+    </form>
+
+    <label class="form-label">Teachers:</label>
+    <div *ngFor="let item of checkboxesDataList">
+        <input type="checkbox" name="" id="" [(ngModel)]="item.isChecked" (change)="changeSelection()">
+        {{item.teacher}}
+    </div>
+
+    <form [formGroup]="classForm" (ngSubmit)="createClass()">
+
+        <p *ngIf="classForm.status == 'INVALID'" class="text-muted mt-3">Complete the form to enable button.</p>
+
+        <button id="test" class="btn btn-primary mt-3" type="submit" onclick="createClass()"
+            [disabled]="!classForm.valid">Create
+            Class</button>
+
+    </form>
+</div>

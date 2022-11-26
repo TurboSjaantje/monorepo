@@ -8,10 +8,12 @@
 
 <div class="row align-items-center mb-3">
     <div class="col-lg-4 col-md-12">
-        <p>Ik ben Daan van der meulen, ik ben een student informatica aan de Avans Hogeschool in Breda. Naast mijn studie ben ik werkenden als een junior software engineer bij Mastex Software BV.</p>
+        <p>Ik ben Daan van der meulen, ik ben een student informatica aan de Avans Hogeschool in Breda. Naast mijn
+            studie ben ik werkenden als een junior software engineer bij Mastex Software BV.</p>
     </div>
     <div class="col-lg-3 col-md-12 mb-4 text-center order-first">
-        <img src="../../assets/images/DaanVanDerMeulen.jpg" style="box-shadow: 10px 10px 5px -5px lightgray;" width="300px">
+        <img src="../../assets/images/DaanVanDerMeulen.jpg" style="box-shadow: 10px 10px 5px -5px lightgray;"
+            width="300px">
     </div>
 </div>
 
@@ -83,3 +85,223 @@
     </div>
 </div>
 
+<div class="row mb-2">
+    <h4>Entities</h4>
+</div>
+
+<div class="row align-items-center mb-3">
+    <div class="row">
+        <!-- User -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>User</b><i> (Super of Admin and Teacher)</i></th>
+                </tr>
+                <tr>
+                    <td>*Emailaddress</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><i>string</i></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Admin -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>Admin</b></th>
+                </tr>
+                <tr>
+                    <td>firstName</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>lastName</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>birthDate</td>
+                    <td><i>Date</i></td>
+                </tr>
+                <tr>
+                    <td>city</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>street</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>houseNumber</td>
+                    <td><i>number</i></td>
+                </tr>
+                <tr>
+                    <td>postalCode</td>
+                    <td><i>string</i></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Teacher -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>Teacher</b></th>
+                </tr>
+                <tr>
+                    <td>firstName</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>lastName</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>birthDate</td>
+                    <td><i>Date</i></td>
+                </tr>
+                <tr>
+                    <td>city</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>street</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>houseNumber</td>
+                    <td><i>number</i></td>
+                </tr>
+                <tr>
+                    <td>postalCode</td>
+                    <td><i>string</i></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Class -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>Class</b></th>
+                </tr>
+                <tr>
+                    <td>*id</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>age</td>
+                    <td><i>number</i></td>
+                </tr>
+                <tr>
+                    <td>time</td>
+                    <td><i>Time</i></td>
+                </tr>
+                <tr>
+                    <td>teachers</td>
+                    <td><i>Teacher[]</i></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Student -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>Student</b></th>
+                </tr>
+                <tr>
+                    <td>*id</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>firstName</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>lastName</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>birthDate</td>
+                    <td><i>Date</i></td>
+                </tr>
+                <tr>
+                    <td>city</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>street</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>houseNumber</td>
+                    <td><i>number</i></td>
+                </tr>
+                <tr>
+                    <td>postalCode</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>image</td>
+                    <td><i>blob</i></td>
+                </tr>
+                <tr>
+                    <td>familyMembers</td>
+                    <td><i>Student[]</i></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Speciality -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>Speciality</b></th>
+                </tr>
+                <tr>
+                    <td>*name</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>description</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>specialityTips</td>
+                    <td><i>SpecialityTip[]</i></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Speciality tips -->
+        <div class="col col-md-4 col-sm-12 mb-4">
+            <table>
+                <tr>
+                    <th colspan="2"><b>SpecialityTip</b></th>
+                </tr>
+                <tr>
+                    <td>*id</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>description</td>
+                    <td><i>string</i></td>
+                </tr>
+                <tr>
+                    <td>usecase</td>
+                    <td><i>string</i></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

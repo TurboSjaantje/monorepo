@@ -2,68 +2,67 @@ import { Injectable } from '@angular/core';
 import { UnsubscriptionErrorCtor } from 'rxjs/internal/util/UnsubscriptionError';
 import { arrayBuffer } from 'stream/consumers';
 import { Teacher } from './teacher.model';
+import { dataListItem } from '../class/create-class/create-class.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class TeacherService {
-
   teachers: Teacher[] = [
     {
-      emailAddress: "MarliesvanderHoek@armyspy.com",
-      firstName: "Marlies",
-      lastName: "van der Hoek",
+      emailAddress: 'MarliesvanderHoek@armyspy.com',
+      firstName: 'Marlies',
+      lastName: 'van der Hoek',
       birthDate: new Date(1964, 9, 6),
-      city: "Amsterdam",
-      street: "Schaepmanstraat",
+      city: 'Amsterdam',
+      street: 'Schaepmanstraat',
       houseNumber: 84,
-      postalCode: "1051 JJ"
+      postalCode: '1051 JJ',
     },
     {
-      emailAddress: "HelenevanderKamp@armyspy.com",
-      firstName: "Helene",
-      lastName: "van der Kamp",
+      emailAddress: 'HelenevanderKamp@armyspy.com',
+      firstName: 'Helene',
+      lastName: 'van der Kamp',
       birthDate: new Date(1970, 7, 24),
-      city: "Waspik",
-      street: "Van Gentstraat",
+      city: 'Waspik',
+      street: 'Van Gentstraat',
       houseNumber: 87,
-      postalCode: "5165 CV"
+      postalCode: '5165 CV',
     },
     {
-      emailAddress: "BobbyVerbeet@armyspy.com",
-      firstName: "Bobby",
-      lastName: "Verbeet",
+      emailAddress: 'BobbyVerbeet@armyspy.com',
+      firstName: 'Bobby',
+      lastName: 'Verbeet',
       birthDate: new Date(1965, 2, 10),
-      city: "Velp",
-      street: "Alteveer",
+      city: 'Velp',
+      street: 'Alteveer',
       houseNumber: 68,
-      postalCode: "6881 BG"
+      postalCode: '6881 BG',
     },
     {
-      emailAddress: "JanneterBrugge@armyspy.com",
-      firstName: "Janne",
-      lastName: "ter Brugge",
+      emailAddress: 'JanneterBrugge@armyspy.com',
+      firstName: 'Janne',
+      lastName: 'ter Brugge',
       birthDate: new Date(1968, 1, 24),
-      city: "Geleen",
-      street: "Hoge Kanaalweg",
+      city: 'Geleen',
+      street: 'Hoge Kanaalweg',
       houseNumber: 27,
-      postalCode: "6167 RJ"
+      postalCode: '6167 RJ',
     },
     {
-      emailAddress: "IrenaMolenkamp@teleworm.us",
-      firstName: "Irena",
-      lastName: "Molenkamp",
+      emailAddress: 'IrenaMolenkamp@teleworm.us',
+      firstName: 'Irena',
+      lastName: 'Molenkamp',
       birthDate: new Date(19676, 2, 12),
-      city: "Gorredijk",
-      street: "Watse Eelkesstrjitte",
+      city: 'Gorredijk',
+      street: 'Watse Eelkesstrjitte',
       houseNumber: 75,
-      postalCode: "8401 RG"
+      postalCode: '8401 RG',
     },
-  ]
+  ];
 
   constructor() {
-    console.log("TeacherService created");
+    console.log('TeacherService created');
   }
 
   getAllTeachers(): Teacher[] {
@@ -71,14 +70,26 @@ export class TeacherService {
   }
 
   getTeacherById(teacherEmail: string): Teacher {
-    return this.teachers.filter(t => t.emailAddress == teacherEmail)[0];
+    return this.teachers.filter((t) => t.emailAddress == teacherEmail)[0];
+  }
+
+  getMultipleTeachersById(teacherIds: dataListItem[]): Teacher[] {
+    let returnTeachers: Teacher[] = [];
+    for (let teacher of teacherIds) {
+      returnTeachers.push(this.teachers.filter(t => t.emailAddress == teacher.id)[0]);
+    }
+    return returnTeachers;
   }
 
   createTeacher(newTeacher: Teacher) {
-    if (this.teachers.filter(t => t.emailAddress == newTeacher.emailAddress)[0] == null){
+    if (
+      this.teachers.filter(
+        (t) => t.emailAddress == newTeacher.emailAddress
+      )[0] == null
+    ) {
       this.teachers.push(newTeacher);
     } else {
-      console.log("error");
+      console.log('error');
     }
   }
 
@@ -98,8 +109,9 @@ export class TeacherService {
   }
 
   deleteTeacher(teacher: Teacher) {
-    const teacherIndex = this.teachers.findIndex(t => t.emailAddress === teacher.emailAddress);
+    const teacherIndex = this.teachers.findIndex(
+      (t) => t.emailAddress === teacher.emailAddress
+    );
     this.teachers.splice(teacherIndex, 1);
   }
-
 }

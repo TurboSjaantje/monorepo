@@ -1,1 +1,41 @@
-<p>read-class works!</p>
+<div class="wrapper p-4 mb-5" *ngIf="class">
+    <div class="row border-bottom mb-3">
+        <h1>Viewing class '{{this.class.name}} for children of {{this.class.age}} years old'</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Name : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class.name}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Age : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class.age}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Time : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class.time}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Teachers : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <ul>
+                <li *ngFor="let teacher of class.teachers">
+                    <p>{{teacher.firstName}} {{teacher.lastName}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

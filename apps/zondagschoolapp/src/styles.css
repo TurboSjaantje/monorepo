@@ -5,12 +5,13 @@
     --fourthcolor: #AD6253;
     --fifthcolor: #61372F;
 }
-    
-p, .p {
+
+p,
+.p {
     font-size: 20px;
 }
 
-.text-muted{
+.text-muted {
     font-size: 15px;
 }
 
@@ -25,4 +26,11 @@ p, .p {
     background-color: transparent;
     color: black;
     border: 1px solid black;
+}
+
+.btn-primary:disabled {
+    background-color: var(--firstcolor);
+    color: black;
+    border: 1px solid var(--firstcolor);
+    opacity: 0.4;
 }

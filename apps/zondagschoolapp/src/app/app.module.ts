@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +21,7 @@ import { CreateClassComponent } from './class/create-class/create-class.componen
 import { ReadClassComponent } from './class/read-class/read-class.component';
 import { UpdateClassComponent } from './class/update-class/update-class.component';
 import { DeleteClassComponent } from './class/delete-class/delete-class.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -49,8 +49,9 @@ import { DeleteClassComponent } from './class/delete-class/delete-class.componen
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

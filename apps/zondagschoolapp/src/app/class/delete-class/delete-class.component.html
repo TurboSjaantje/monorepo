@@ -1,1 +1,77 @@
-<p>delete-class works!</p>
+<div class="wrapper p-4 mb-5" *ngIf="class">
+    <div class="row border-bottom mb-3">
+        <h1>Deleting class '{{this.class.name}} for children of {{this.class.age}} years old'</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Name : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class.name}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Age : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class.age}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Time : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class.time}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Teachers : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <ul>
+                <li *ngFor="let teacher of class.teachers">
+                    <p>{{teacher.firstName}} {{teacher.lastName}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#deleteClassModal"
+        id="deleteClassInput">Delete Class</button>
+    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/class">Back</button>
+
+    <div id="deleteClassModal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete '{{this.class.name}} for children of {{this.class.age}} years
+                        old'</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button (click)="deleteClass()" routerLink="/class" data-bs-dismiss="modal"
+                        class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var myModal = document.getElementById('deleteClassModal')
+    var myInput = document.getElementById('deleteClassInput')
+    let username = document.getElementById('')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+</script>

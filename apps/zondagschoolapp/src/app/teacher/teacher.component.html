@@ -15,10 +15,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr routerLink="read/{{teacher.emailAddress}}" style="text-decoration: underline;" class="align-items-center justify-content-center"
-                *ngFor="let teacher of teachers; let i = index">
+            <tr routerLink="read/{{teacher.emailAddress}}" style="text-decoration: underline;"
+                class="align-items-center justify-content-center" *ngFor="let teacher of teachers; let i = index">
                 <th scope="row">{{i}}</th>
-                <td >
+                <td>
                     {{ teacher.firstName }} {{teacher.lastName}}
                 </td>
                 <td>{{ teacher.emailAddress }}</td>

@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"
+    <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"
         id="deleteTeacherInput">Delete Teacher</button>
     <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Back</button>
 
@@ -40,7 +40,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button (click)="deleteTeacher()" routerLink="/teacher" data-bs-dismiss="modal" class="btn btn-primary">Save
+                    <button (click)="deleteTeacher()" routerLink="/teacher" data-bs-dismiss="modal"
+                        class="btn btn-primary">Save
                         changes</button>
                 </div>
             </div>
