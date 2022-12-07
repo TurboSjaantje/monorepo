@@ -1,7 +1,9 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
+
 <div *ngIf="this.teacher" class="wrapper">
 
     <div class="row border-bottom mb-3 ms-4">
-        <h1>Deleting teacher '{{this.teacher.firstName}} {{this.teacher.lastName}}'</h1>
+        <h1>Deleting teacher '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
     </div>
     <div class="row mb-4">
         <div class="col-sm-3 text-end">
@@ -14,13 +16,13 @@
             <p><b>Postalcode : </b></p>
         </div>
         <div class="col">
-            <p>{{this.teacher.firstName}} {{this.teacher.lastName}}</p>
-            <p>{{this.teacher.emailAddress}}</p>
-            <p>{{this.teacherBirthDate}}</p>
+            <p>{{this.teacher.firstname}} {{this.teacher.lastname}}</p>
+            <p>{{this.teacher.emailaddress}}</p>
+            <p>{{this.teacher.birthdate! | date: 'dd-MM-yyyy'}}</p>
             <p>{{this.teacher.city}}</p>
             <p>{{this.teacher.street}}</p>
-            <p>{{this.teacher.houseNumber}}</p>
-            <p>{{this.teacher.postalCode}}</p>
+            <p>{{this.teacher.housenumber}}</p>
+            <p>{{this.teacher.postalcode}}</p>
         </div>
     </div>
 
@@ -36,7 +38,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete '{{this.teacher.firstName}} {{this.teacher.lastName}}'</p>
+                    <p>Are you sure you want to delete '{{this.teacher.firstname}} {{this.teacher.lastname}}'</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -58,3 +60,5 @@
         })
     </script>
 </div>
+
+<zondagschoolapp-footer></zondagschoolapp-footer>

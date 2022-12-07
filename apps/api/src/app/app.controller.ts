@@ -1,8 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
-
 import { Message } from '@zondagschoolapp/api-interfaces';
-
-import { AppService } from '../app.service';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
@@ -13,5 +11,4 @@ export class AppController {
     return 'Welcome to the zondagschool api';
   }
 
-  
 }

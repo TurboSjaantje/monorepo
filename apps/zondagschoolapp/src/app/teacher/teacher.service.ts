@@ -1,117 +1,145 @@
 import { Injectable } from '@angular/core';
-import { UnsubscriptionErrorCtor } from 'rxjs/internal/util/UnsubscriptionError';
-import { arrayBuffer } from 'stream/consumers';
 import { Teacher } from './teacher.model';
 import { dataListItem } from '../class/create-class/create-class.component';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, tap } from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class TeacherService {
+
+  BASE_URL = environment.apiUrl;
+
   teachers: Teacher[] = [
     {
-      emailAddress: 'MarliesvanderHoek@armyspy.com',
-      firstName: 'Marlies',
-      lastName: 'van der Hoek',
-      birthDate: new Date(1964, 9, 6),
+      emailaddress: 'MarliesvanderHoek@armyspy.com',
+      firstname: 'Marlies',
+      lastname: 'van der Hoek',
+      birthdate: new Date(1964, 9, 6),
       city: 'Amsterdam',
       street: 'Schaepmanstraat',
-      houseNumber: 84,
-      postalCode: '1051 JJ',
+      housenumber: 84,
+      postalcode: '1051 JJ',
     },
     {
-      emailAddress: 'HelenevanderKamp@armyspy.com',
-      firstName: 'Helene',
-      lastName: 'van der Kamp',
-      birthDate: new Date(1970, 7, 24),
+      emailaddress: 'HelenevanderKamp@armyspy.com',
+      firstname: 'Helene',
+      lastname: 'van der Kamp',
+      birthdate: new Date(1970, 7, 24),
       city: 'Waspik',
       street: 'Van Gentstraat',
-      houseNumber: 87,
-      postalCode: '5165 CV',
+      housenumber: 87,
+      postalcode: '5165 CV',
     },
     {
-      emailAddress: 'BobbyVerbeet@armyspy.com',
-      firstName: 'Bobby',
-      lastName: 'Verbeet',
-      birthDate: new Date(1965, 2, 10),
+      emailaddress: 'BobbyVerbeet@armyspy.com',
+      firstname: 'Bobby',
+      lastname: 'Verbeet',
+      birthdate: new Date(1965, 2, 10),
       city: 'Velp',
       street: 'Alteveer',
-      houseNumber: 68,
-      postalCode: '6881 BG',
+      housenumber: 68,
+      postalcode: '6881 BG',
     },
     {
-      emailAddress: 'JanneterBrugge@armyspy.com',
-      firstName: 'Janne',
-      lastName: 'ter Brugge',
-      birthDate: new Date(1968, 1, 24),
+      emailaddress: 'JanneterBrugge@armyspy.com',
+      firstname: 'Janne',
+      lastname: 'ter Brugge',
+      birthdate: new Date(1968, 1, 24),
       city: 'Geleen',
       street: 'Hoge Kanaalweg',
-      houseNumber: 27,
-      postalCode: '6167 RJ',
+      housenumber: 27,
+      postalcode: '6167 RJ',
     },
     {
-      emailAddress: 'IrenaMolenkamp@teleworm.us',
-      firstName: 'Irena',
-      lastName: 'Molenkamp',
-      birthDate: new Date(19676, 2, 12),
+      emailaddress: 'IrenaMolenkamp@teleworm.us',
+      firstname: 'Irena',
+      lastname: 'Molenkamp',
+      birthdate: new Date(19676, 2, 12),
       city: 'Gorredijk',
       street: 'Watse Eelkesstrjitte',
-      houseNumber: 75,
-      postalCode: '8401 RG',
+      housenumber: 75,
+      postalcode: '8401 RG',
     },
   ];
 
-  constructor() {
+  constructor(private http: HttpClient) {
     console.log('TeacherService created');
   }
 
-  getAllTeachers(): Teacher[] {
-    return this.teachers;
+  getAllTeachers(): Observable<Teacher[]> {
+    const teacherUrl = this.BASE_URL + "/teacher";
+    console.log("GET: " + teacherUrl);
+
+    return this.http.get<Teacher[]>(teacherUrl).pipe(
+      map((response: Teacher[]) => response),
+      tap((teachers: Teacher[]) => {
+        return teachers;
+      })
+    );
   }
 
-  getTeacherById(teacherEmail: string): Teacher {
-    return this.teachers.filter((t) => t.emailAddress == teacherEmail)[0];
+  getTeacherById(teacherEmail: string): Observable<Teacher> {
+    const teacherUrl = this.BASE_URL + "/teacher/" + teacherEmail;
+    console.log("GET: " + teacherUrl);
+
+    return this.http.get<Teacher>(teacherUrl).pipe(
+      map((response: Teacher) => response),
+      tap((teacher: Teacher) => {
+        return teacher;
+      })
+    );
   }
 
   getMultipleTeachersById(teacherIds: dataListItem[]): Teacher[] {
     let returnTeachers: Teacher[] = [];
     for (let teacher of teacherIds) {
-      returnTeachers.push(this.teachers.filter(t => t.emailAddress == teacher.id)[0]);
+      returnTeachers.push(this.teachers.filter(t => t.emailaddress == teacher.id)[0]);
     }
     return returnTeachers;
   }
 
   createTeacher(newTeacher: Teacher) {
-    if (
-      this.teachers.filter(
-        (t) => t.emailAddress == newTeacher.emailAddress
-      )[0] == null
-    ) {
-      this.teachers.push(newTeacher);
+    let teacherExists;
+    let subscription = this.getTeacherById(newTeacher.emailaddress!).subscribe((response) => {
+      teacherExists = response;
+    })
+    subscription.unsubscribe();
+    if (!teacherExists) {
+      const teacherUrl = this.BASE_URL + "/teacher";
+      console.log("POST: " + teacherUrl);
+      let response;
+      this.http.post<Teacher>(teacherUrl, newTeacher).subscribe((response) => {
+        response = response;
+      });
+      console.log(response)
     } else {
-      console.log('error');
+      console.log("Teacher with emailaddress: " + newTeacher.emailaddress + " already exists!");
     }
   }
 
   updateTeacher(oldTeacher: Teacher, newTeacher: Teacher) {
-    for (const teacher of this.teachers) {
-      if (teacher.emailAddress == oldTeacher.emailAddress) {
-        teacher.emailAddress = newTeacher.emailAddress;
-        teacher.firstName = newTeacher.firstName;
-        teacher.lastName = newTeacher.lastName;
-        teacher.birthDate = newTeacher.birthDate;
-        teacher.city = newTeacher.city;
-        teacher.street = newTeacher.street;
-        teacher.houseNumber = newTeacher.houseNumber;
-        teacher.postalCode = newTeacher.postalCode;
-      }
-    }
+    const teacherUrl = this.BASE_URL + "/teacher/" + oldTeacher.emailaddress;
+    console.log("PUT: " + teacherUrl);
+    let response;
+    this.http.put<Teacher>(teacherUrl, newTeacher).subscribe((response) => {
+      response = response;
+    });
+    console.log(response)
   }
 
   deleteTeacher(teacher: Teacher) {
-    const teacherIndex = this.teachers.findIndex(
-      (t) => t.emailAddress === teacher.emailAddress
-    );
-    this.teachers.splice(teacherIndex, 1);
+    if (teacher) {
+      const teacherUrl = this.BASE_URL + "/teacher/" + teacher.emailaddress;
+      console.log("DELETE: " + teacherUrl);
+      let deletedTeacher;
+      this.http.delete(teacherUrl).subscribe((response) => {
+        deletedTeacher = response;
+      })
+      console.log(deletedTeacher);
+    }
   }
 }

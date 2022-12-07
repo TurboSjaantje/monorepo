@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Console } from 'console';
+import { Subscription } from 'rxjs';
 import { Teacher } from '../../teacher/teacher.model';
 import { TeacherService } from '../../teacher/teacher.service';
 import { Class } from '../class.model';
@@ -25,7 +26,7 @@ export class dataListItem {
 })
 
 export class CreateClassComponent implements OnInit {
-
+  subscription: Subscription | undefined;
   checkboxesDataList: dataListItem[] = [];
 
   teachers: Teacher[] | undefined;
@@ -37,23 +38,26 @@ export class CreateClassComponent implements OnInit {
   constructor(private teacherService: TeacherService, private classService: ClassService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.teachers = this.teacherService.getAllTeachers();
-    console.log(this.teachers.length + " teachers found.");
-
-    for (let t of this.teachers) {
-      if (t.emailAddress && t.firstName && t.lastName) {
-        this.checkboxesDataList.push(new dataListItem(t.emailAddress, t.firstName + ' ' + t.lastName, false))
+    //Subscribing to teacher from httpService
+    console.log("subscribing");
+    this.subscription = this.teacherService.getAllTeachers().subscribe((response) => {
+      this.teachers = response;
+      console.log(this.teachers);
+      for (let t of this.teachers) {
+        if (t.emailaddress && t.firstname && t.lastname) {
+          this.checkboxesDataList.push(new dataListItem(t.emailaddress, t.firstname + ' ' + t.lastname, false))
+        }
       }
-    }
-
-    this.classForm = this.fb.group({
-      name: ['', Validators.required],
-      age: [0, Validators.required],
-      time: ['', Validators.required],
+      this.classForm = this.fb.group({
+        name: ['', Validators.required],
+        age: [0, Validators.required],
+        time: ['', Validators.required],
+      })
+      this.fetchSelectedItems();
+      this.fetchCheckedIDs();
     })
 
-    this.fetchSelectedItems();
-    this.fetchCheckedIDs();
+    if (this.teachers) console.log(this.teachers.length + " teachers found.");
   }
 
   createClass() {
@@ -88,6 +92,13 @@ export class CreateClassComponent implements OnInit {
         this.checkedIDs.push(value.id);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      console.log("unsubscribing");
+      this.subscription.unsubscribe();
+    }
   }
 
 }

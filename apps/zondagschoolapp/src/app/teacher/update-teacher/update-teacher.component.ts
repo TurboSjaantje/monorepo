@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Component, OnInit, LOCALE_ID, Inject, ComponentFactoryResolver } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Teacher } from '../teacher.model';
 import { TeacherService } from '../teacher.service';
 
@@ -15,19 +17,32 @@ export class UpdateTeacherComponent implements OnInit {
   teacher: Teacher | undefined;
   teacherBirthDate: string | undefined;
 
+  subscription: Subscription | undefined;
+
   teacherForm: FormGroup = new FormGroup('');
 
   constructor(private teacherService: TeacherService, private fb: FormBuilder, private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router, @Inject(LOCALE_ID) public locale: string) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.teacherEmailAddress = params.get("id");
       if (this.teacherEmailAddress) {
         console.log("teacher exists with email: " + this.teacherEmailAddress);
-        this.teacher = this.teacherService.getTeacherById(this.teacherEmailAddress);
-        this.teacherBirthDate = this.teacher.birthDate?.toISOString().split("T")[0];
-        console.log(this.teacherBirthDate);
+        this.subscription = this.teacherService.getTeacherById(this.teacherEmailAddress).subscribe((response) => {
+          this.teacher = response;
+          this.teacherBirthDate = (formatDate(this.teacher!.birthdate!, 'yyyy/MM/dd', this.locale));
+          this.teacherForm.patchValue({
+            emailAddress: this.teacher.emailaddress,
+            firstName: this.teacher.firstname,
+            lastName: this.teacher.lastname,
+            birthDate: this.teacherBirthDate,
+            city: this.teacher.city,
+            street: this.teacher.street,
+            houseNumber: this.teacher.housenumber?.toString(),
+            postalCode: this.teacher.postalcode
+          });
+        });
 
         this.teacherForm = this.fb.group({
           emailAddress: ['', Validators.required],
@@ -38,17 +53,6 @@ export class UpdateTeacherComponent implements OnInit {
           street: ['', Validators.required],
           houseNumber: ['', Validators.required],
           postalCode: ['', Validators.required]
-        });
-
-        this.teacherForm.patchValue({
-          emailAddress: this.teacher.emailAddress,
-          firstName: this.teacher.firstName,
-          lastName: this.teacher.lastName,
-          birthDate: this.teacherBirthDate,
-          city: this.teacher.city,
-          street: this.teacher.street,
-          houseNumber: this.teacher.houseNumber?.toString(),
-          postalCode: this.teacher.postalCode
         });
 
       } else {
@@ -74,4 +78,10 @@ export class UpdateTeacherComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      console.log("unsubscribing");
+      this.subscription.unsubscribe();
+    }
+  }
 }

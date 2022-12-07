@@ -22,6 +22,7 @@ import { ReadClassComponent } from './class/read-class/read-class.component';
 import { UpdateClassComponent } from './class/update-class/update-class.component';
 import { DeleteClassComponent } from './class/delete-class/delete-class.component';
 import { FormsModule } from '@angular/forms';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [

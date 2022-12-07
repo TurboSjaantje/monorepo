@@ -1,12 +1,14 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
 <div *ngIf="this.teacher" class="wrapper">
     <div class="row border-bottom mb-4">
-        <h1>Update Teacher '{{this.teacher.firstName}} {{this.teacher.lastName}}'</h1>
+        <h1>Update Teacher '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
     </div>
 
     <form [formGroup]="teacherForm" (ngSubmit)="updateTeacher()">
 
         <label class="form-label" for="emailAddress">Email Address: </label>
-        <input class="form-control mb-2" id="emailAddress" type="text" formControlName="emailAddress">
+        <input class="form-control mb-2" id="emailAddress" type="text" value={{this.teacher.emailaddress}}
+            formControlName="emailAddress">
 
         <label class="form-label" for="firstName">First Name: </label>
         <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
@@ -45,7 +47,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to udpate '{{this.teacher.firstName}} {{this.teacher.lastName}}'</p>
+                        <p>Are you sure you want to udpate '{{this.teacher.firstname}} {{this.teacher.lastname}}'</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -57,6 +59,7 @@
         </div>
     </form>
 </div>
+<zondagschoolapp-footer></zondagschoolapp-footer>
 
 <script>
     var myModal = document.getElementById('updateTeacherModal')

@@ -1,13 +1,14 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
 <div class="wrapper p-4 mb-5" *ngIf="teacher">
     <div class="row border-bottom mb-3">
-        <h1>Viewing teacher '{{this.teacher.firstName}} {{this.teacher.lastName}}'</h1>
+        <h1>Viewing teacher '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
             <p><b>Name : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>{{this.teacher.firstName}} {{this.teacher.lastName}}</p>
+            <p>{{this.teacher.firstname}} {{this.teacher.lastname}}</p>
         </div>
     </div>
     <div class="row">
@@ -15,7 +16,7 @@
             <p><b>Email Address : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>{{this.teacher.emailAddress}}</p>
+            <p>{{this.teacher.emailaddress}}</p>
         </div>
     </div>
     <div class="row">
@@ -23,7 +24,7 @@
             <p><b>Birthday : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>{{this.teacherBirthDate}}</p>
+            <p>{{this.teacher.birthdate! | date : 'dd-MM-yyyy'}}</p>
         </div>
     </div>
     <div class="row">
@@ -47,7 +48,7 @@
             <p><b>Housenumber : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>{{this.teacher.houseNumber}}</p>
+            <p>{{this.teacher.housenumber}}</p>
         </div>
     </div>
     <div class="row">
@@ -55,7 +56,7 @@
             <p><b>Postalcode : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>{{this.teacher.postalCode}}</p>
+            <p>{{this.teacher.postalcode}}</p>
         </div>
     </div>
     <div class="row">
@@ -64,3 +65,4 @@
         </div>
     </div>
 </div>
+<zondagschoolapp-footer></zondagschoolapp-footer>

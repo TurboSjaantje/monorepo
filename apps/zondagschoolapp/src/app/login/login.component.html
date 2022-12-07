@@ -1,1 +1,19 @@
-<p>login works!</p>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid p-2">
+        <a class="navbar-brand ms-3" href="#">Zondagschool 'De Liefde'</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+<form [formGroup]="userForm" (ngSubmit)="loginUser()" id="loginForm" class="col-lg-6 col-md-8 col-sm-10 m-auto">
+    <label class="form-label" for="emailaddress">Email</label>
+    <input class="form-control mb-2" id="emailaddress" type="text" formControlName="emailaddress">
+
+    <label class="form-label" for="password">Password</label>
+    <input class="form-control mb-2" id="password" type="text" formControlName="password">
+
+    <button class="btn btn-primary mt-2" type="submit" [disabled]="!userForm.valid">Login</button>
+</form>

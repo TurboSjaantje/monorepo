@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Teacher } from '../teacher.model';
 import { TeacherService } from '../teacher.service';
 
@@ -14,6 +15,7 @@ export class DeleteTeacherComponent implements OnInit {
   teacherId: string | null | undefined;
   teacher: Teacher | undefined;
   teacherBirthDate: string | undefined;
+  subscription: Subscription | undefined;
 
   constructor(private teacherService: TeacherService, private route: ActivatedRoute,
     private router: Router) { }
@@ -23,8 +25,12 @@ export class DeleteTeacherComponent implements OnInit {
       this.teacherId = params.get("id");
       if (this.teacherId) {
         console.log("teacher exists with id: " + this.teacherId);
-        this.teacher = this.teacherService.getTeacherById(this.teacherId);
-        this.teacherBirthDate = this.teacher.birthDate?.toDateString();
+        this.subscription = this.teacherService.getTeacherById(this.teacherId).subscribe((response) => {
+          this.teacher = response;
+        });
+
+        if (this.teacher)
+          this.teacherBirthDate = this.teacher.birthdate?.toDateString();
       } else {
         console.log("teacher does not exist with id: " + this.teacherId);
       }

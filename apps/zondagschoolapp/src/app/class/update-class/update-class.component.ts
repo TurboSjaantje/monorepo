@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Console } from 'console';
+import { Subscription } from 'rxjs';
 import { Teacher } from '../../teacher/teacher.model';
 import { TeacherService } from '../../teacher/teacher.service';
 import { Class } from '../class.model';
@@ -25,6 +26,7 @@ export class dataListItem {
   styleUrls: ['./update-class.component.css'],
 })
 export class UpdateClassComponent implements OnInit {
+  subscription: Subscription | undefined;
   checkboxesDataList: dataListItem[] = [];
 
   teachers: Teacher[] | undefined;
@@ -49,14 +51,21 @@ export class UpdateClassComponent implements OnInit {
       }
     })
 
-    this.teachers = this.teacherService.getAllTeachers();
-    console.log(this.teachers.length + " teachers found.");
+    //Subscribing to teacher from httpService
+    console.log("subscribing");
+    this.subscription = this.teacherService.getAllTeachers().subscribe((response) => {
+      this.teachers = response;
+      console.log(this.teachers);
+    })
 
-    for (let t of this.teachers) {
-      if (t.emailAddress && t.firstName && t.lastName) {
-        this.checkboxesDataList.push(new dataListItem(t.emailAddress, t.firstName + ' ' + t.lastName, false))
+    if (this.teachers) console.log(this.teachers.length + " teachers found.");
+
+    if (this.teachers)
+      for (let t of this.teachers) {
+        if (t.emailaddress && t.firstname && t.lastname) {
+          this.checkboxesDataList.push(new dataListItem(t.emailaddress, t.firstname + ' ' + t.lastname, false))
+        }
       }
-    }
 
     this.classForm = this.fb.group({
       name: [this.class?.name, Validators.required],
@@ -80,7 +89,7 @@ export class UpdateClassComponent implements OnInit {
     let time = this.classForm.value.time;
     let teachers = this.teacherService.getMultipleTeachersById(this.selectedItemsList);
 
-    for (let teacher of teachers) console.log(teacher.firstName + ' ' + teacher.lastName);
+    for (let teacher of teachers) console.log(teacher.firstname + ' ' + teacher.lastname);
 
     if (name && age && time && teachers && this.class) {
       this.classService.updateClass(this.class, new Class(name, age, time, teachers));
@@ -102,7 +111,7 @@ export class UpdateClassComponent implements OnInit {
   setSelectedItems(teachers: Teacher[]) {
     for (let teacher of teachers) {
       for (let item of this.checkboxesDataList) {
-        if (item.id == teacher.emailAddress) item.isChecked = true;
+        if (item.id == teacher.emailaddress) item.isChecked = true;
       }
     }
   }
@@ -114,6 +123,13 @@ export class UpdateClassComponent implements OnInit {
         this.checkedIDs.push(value.id);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      console.log("unsubscribing");
+      this.subscription.unsubscribe();
+    }
   }
 
 }

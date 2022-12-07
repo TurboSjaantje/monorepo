@@ -14,15 +14,17 @@ import { UpdateClassComponent } from './class/update-class/update-class.componen
 import { ReadClassComponent } from './class/read-class/read-class.component';
 import { CreateClassComponent } from './class/create-class/create-class.component';
 import { DeleteClassComponent } from './class/delete-class/delete-class.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Route[] = [
 
   //Default route
-  { path: "", component: HomeComponent },
+  { path: "", component: LoginComponent },
 
   //Homepages
   { path: "home", component: HomeComponent },
-  { path: "teacher", component: TeacherComponent },
+  { path: "teacher", component: TeacherComponent, canActivate: [AuthGuard] },
   { path: "class", component: ClassComponent },
   { path: "speciality", component: SpecialityComponent },
   { path: "about", component: AboutComponent },
