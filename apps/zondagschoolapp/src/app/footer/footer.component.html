@@ -7,7 +7,7 @@
                         <a routerLink="home">Home</a>
                     </h6>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" *ngIf="userIsAdmin">
                     <h6 class=" font-weight-bold">
                         <a routerLink="teacher">Teachers</a>
                     </h6>

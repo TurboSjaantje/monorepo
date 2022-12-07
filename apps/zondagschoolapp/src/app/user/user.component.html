@@ -1,1 +1,68 @@
-<p>user works!</p>
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
+<div class="wrapper p-4 mb-5" *ngIf="teacher">
+    <div class="row border-bottom mb-3">
+        <h1>{{this.teacher.firstname}} {{this.teacher.lastname}}</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Name : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.firstname}} {{this.teacher.lastname}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Email Address : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.emailaddress}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Birthday : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.birthdate! | date : 'dd-MM-yyyy'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>City : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.city}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Street : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.street}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Housenumber : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.housenumber}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Postalcode : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.teacher.postalcode}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-6 ms-auto">
+            <button class="btn btn-secondary mt-2 px-4" routerLink="/home">Back</button>
+        </div>
+    </div>
+</div>
+<zondagschoolapp-footer></zondagschoolapp-footer>

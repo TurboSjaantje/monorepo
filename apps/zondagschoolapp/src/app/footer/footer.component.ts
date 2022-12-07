@@ -6,7 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  constructor() {}
 
-  ngOnInit(): void {}
+  userIsAdmin: boolean | undefined;
+
+  constructor() { }
+
+  ngOnInit(): void {
+    let user = JSON.parse(localStorage.getItem('currentuser')!);
+    for (let i of user.roles) {
+      if (i == 'admin') this.userIsAdmin = true;
+    }
+  }
 }

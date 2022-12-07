@@ -6,7 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  userIsAdmin: boolean | undefined;
 
-  ngOnInit(): void {}
+  constructor() { }
+
+  ngOnInit(): void {
+    let user = JSON.parse(localStorage.getItem('currentuser')!);
+    for (let i of user.roles) {
+      if (i == 'admin') this.userIsAdmin = true;
+    }
+  }
 }

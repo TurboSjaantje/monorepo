@@ -24,6 +24,16 @@ export class LoginService {
     localStorage.setItem(this.CURRENT_USER, JSON.stringify(token));
   }
 
+  getUserFromLocalStorage(): Observable<Token | undefined> {
+    const userData = localStorage.getItem(this.CURRENT_USER);
+    if (userData) {
+      const localUser = JSON.parse(userData);
+      return of(localUser);
+    } else {
+      return of(undefined);
+    }
+  }
+
   login(formData: Credentials): Observable<Token | undefined> {
     return this.http.post<Token>(this.BASE_URL + "/api/login", formData, { headers: this.headers })
       .pipe(

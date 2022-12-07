@@ -16,6 +16,7 @@ import { CreateClassComponent } from './class/create-class/create-class.componen
 import { DeleteClassComponent } from './class/delete-class/delete-class.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
+import { UserComponent } from './user/user.component';
 
 const routes: Route[] = [
 
@@ -29,6 +30,7 @@ const routes: Route[] = [
   { path: "speciality", component: SpecialityComponent },
   { path: "about", component: AboutComponent },
   { path: "student", component: StudentComponent },
+  { path: "user", component: UserComponent },
 
   //CRUD Teacher
   { path: "teacher/edit/:id", component: UpdateTeacherComponent },
