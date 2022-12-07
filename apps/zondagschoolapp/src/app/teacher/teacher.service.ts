@@ -71,7 +71,7 @@ export class TeacherService {
   }
 
   getAllTeachers(): Observable<Teacher[]> {
-    const teacherUrl = this.BASE_URL + "/teacher";
+    const teacherUrl = this.BASE_URL + "/api/teacher";
     console.log("GET: " + teacherUrl);
 
     return this.http.get<Teacher[]>(teacherUrl).pipe(
@@ -83,7 +83,7 @@ export class TeacherService {
   }
 
   getTeacherById(teacherEmail: string): Observable<Teacher> {
-    const teacherUrl = this.BASE_URL + "/teacher/" + teacherEmail;
+    const teacherUrl = this.BASE_URL + "/api/teacher/" + teacherEmail;
     console.log("GET: " + teacherUrl);
 
     return this.http.get<Teacher>(teacherUrl).pipe(
@@ -109,7 +109,7 @@ export class TeacherService {
     })
     subscription.unsubscribe();
     if (!teacherExists) {
-      const teacherUrl = this.BASE_URL + "/teacher";
+      const teacherUrl = this.BASE_URL + "/api/teacher";
       console.log("POST: " + teacherUrl);
       let response;
       this.http.post<Teacher>(teacherUrl, newTeacher).subscribe((response) => {
@@ -122,7 +122,7 @@ export class TeacherService {
   }
 
   updateTeacher(oldTeacher: Teacher, newTeacher: Teacher) {
-    const teacherUrl = this.BASE_URL + "/teacher/" + oldTeacher.emailaddress;
+    const teacherUrl = this.BASE_URL + "/api/teacher/" + oldTeacher.emailaddress;
     console.log("PUT: " + teacherUrl);
     let response;
     this.http.put<Teacher>(teacherUrl, newTeacher).subscribe((response) => {
@@ -133,7 +133,7 @@ export class TeacherService {
 
   deleteTeacher(teacher: Teacher) {
     if (teacher) {
-      const teacherUrl = this.BASE_URL + "/teacher/" + teacher.emailaddress;
+      const teacherUrl = this.BASE_URL + "/api/teacher/" + teacher.emailaddress;
       console.log("DELETE: " + teacherUrl);
       let deletedTeacher;
       this.http.delete(teacherUrl).subscribe((response) => {

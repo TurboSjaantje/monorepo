@@ -25,7 +25,7 @@ export class LoginService {
   }
 
   login(formData: Credentials): Observable<Token | undefined> {
-    return this.http.post<Token>("/api/login", formData, { headers: this.headers })
+    return this.http.post<Token>(this.BASE_URL + "/api/login", formData, { headers: this.headers })
       .pipe(
         map((data: any) => data),
         map((token: Token) => {
