@@ -23,6 +23,7 @@ import { UpdateClassComponent } from './class/update-class/update-class.componen
 import { DeleteClassComponent } from './class/delete-class/delete-class.component';
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth.guard';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -44,15 +45,16 @@ import { AuthGuard } from './auth.guard';
     ReadClassComponent,
     UpdateClassComponent,
     DeleteClassComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -45,6 +45,7 @@ export class LoginService {
   }
 
   logout(): void {
+    console.log('logging out');
     this.router
       .navigate(['/'])
       .then((success) => {

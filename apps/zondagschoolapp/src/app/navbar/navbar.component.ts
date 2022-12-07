@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'zondagschoolapp-navbar',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  constructor(private loginService: LoginService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  logOut(): void {
+    console.log('test');
+    this.loginService.logout();
+  }
 }
