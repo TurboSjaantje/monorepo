@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Teacher } from '../teacher.model';
 import { TeacherService } from '../teacher.service';
 import { Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'zondagschoolapp-create-teacher',
@@ -22,7 +23,7 @@ export class CreateTeacherComponent implements OnInit {
     postalCode: ['', Validators.required]
   });
 
-  constructor(private teacherService: TeacherService, private fb: FormBuilder) {
+  constructor(private teacherService: TeacherService, private fb: FormBuilder, private router: Router) {
 
   }
 
@@ -44,5 +45,7 @@ export class CreateTeacherComponent implements OnInit {
     }
 
     this.teacherForm.reset();
+
+    this.router.navigate(['/teacher']);
   }
 }

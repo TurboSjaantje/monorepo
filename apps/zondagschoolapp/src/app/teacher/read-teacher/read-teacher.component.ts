@@ -79,6 +79,6 @@ export class ReadTeacherComponent implements OnInit {
       this.userService.addUser(this.createLoginForm.value.emailaddress!, this.createLoginForm.value.password, this.createLoginForm.value.admin!);
     }
     this.userExists = true;
-    await this.router.navigate(['/teacher/' + this.teacher?.emailaddress])
+    await this.router.navigate(['/teacher/read/' + this.teacher?.emailaddress])
   }
 }

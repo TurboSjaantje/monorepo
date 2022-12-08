@@ -1,7 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
+import { verify, JwtPayload } from 'jsonwebtoken';
 import { User, UserDocument } from './user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -13,7 +12,7 @@ export class UserService {
 
   async ensureExists(user: User) {
     try {
-      await this.userModel.create(user);
+      return await this.userModel.create(user);
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +29,7 @@ export class UserService {
 
   async addUser(user: User) {
     user.password = await this.hashPassword(user.password);
-    await this.ensureExists(user);
+    return await this.ensureExists(user);
   }
 
   async updateUser(email: string, user: User) {
@@ -52,4 +51,5 @@ export class UserService {
     const saltOrRounds = 10;
     return await bcrypt.hash(password, saltOrRounds);
   }
+
 }

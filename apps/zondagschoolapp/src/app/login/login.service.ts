@@ -34,6 +34,17 @@ export class LoginService {
     }
   }
 
+  getAuthorizationToken(): string | undefined {
+    const userData = localStorage.getItem(this.CURRENT_USER);
+    if (userData) {
+      const token: Token = JSON.parse(userData);
+
+      return token.token;
+    } else {
+      return undefined;
+    }
+  }
+
   login(formData: Credentials): Observable<Token | undefined> {
     return this.http.post<Token>(this.BASE_URL + "/api/login", formData, { headers: this.headers })
       .pipe(

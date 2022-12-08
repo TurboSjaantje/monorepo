@@ -24,6 +24,7 @@ import { DeleteClassComponent } from './class/delete-class/delete-class.componen
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth.guard';
 import { UserComponent } from './user/user.component';
+import { AuthInterceptor, httpInterceptorProviders } from './login/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { UserComponent } from './user/user.component';
     ReactiveFormsModule,
     FormsModule,
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

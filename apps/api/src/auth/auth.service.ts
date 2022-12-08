@@ -16,14 +16,16 @@ export class AuthService {
         const filter = { emailaddress: email }
         const identity = await this.userModel.findOne(filter);
 
-        console.log(email)
-        console.log(password)
-        console.log(identity.password)
+        // let userRole;
+        // for (let role of identity.roles) {
+        //     if (role == 'admin') userRole = role;
+        //     else if (role == 'teacher' && userRole != 'admin') userRole = 'teacher';
+        // }
 
         if (!identity || !(await compare(password, identity.password))) throw new Error("user not authorized");
 
         return new Promise((resolve, reject) => {
-            sign({ email }, "Secret", (err: Error, token: string) => {
+            sign({ identity }, "Secret", (err: Error, token: string) => {
                 if (err) {
                     console.log(err)
                     reject(err);

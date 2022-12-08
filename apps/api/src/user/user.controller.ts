@@ -1,8 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.schema';
+import { InjectToken, Token } from '../auth/token.decorator';
+import { verify } from 'jsonwebtoken';
+import { Headers } from '@nestjs/common';
+import { AuthGuard } from '../auth/auth.guard';
+import { AdminGuard } from '../auth/admin.guard';
+import { TeacherGuard } from '../auth/teacher.guard';
 
 @Controller('user')
 export class UserController {
@@ -18,7 +22,20 @@ export class UserController {
     return this.userService.getById(email);
   }
 
+  @Post('/admin')
+  @UseGuards(AdminGuard)
+  sayHi2() {
+    return 'hi2';
+  }
+
+  @Post('/teacher')
+  @UseGuards(TeacherGuard)
+  sayHi() {
+    return 'hi';
+  }
+
   @Post()
+  @UseGuards(AdminGuard)
   create(@Body() user: User) {
     return this.userService.addUser(user);
   }
