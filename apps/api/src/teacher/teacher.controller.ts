@@ -1,7 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
-import { CreateTeacherDto } from './dto/create-teacher.dto';
-import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { Teacher } from './teacher.schema';
 import mongoose, { ObjectId } from 'mongoose';
 import { listenerCount } from 'events';
