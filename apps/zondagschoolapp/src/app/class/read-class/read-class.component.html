@@ -30,12 +30,24 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Teachers : </b></p>
+            <p><b>Gegeven door leraren : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <ul>
                 <li *ngFor="let teacher of class.teachers">
                     <p>{{teacher.firstname}} {{teacher.lastname}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Leerlingen : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12" style="height:200px; overflow-y:scroll;">
+            <ul>
+                <li *ngFor="let student of this.students">
+                    <p>{{student.firstname}} {{student.lastname}}</p>
                 </li>
             </ul>
         </div>

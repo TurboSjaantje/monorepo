@@ -1,0 +1,75 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
+
+<div class="wrapper p-4 mb-5" *ngIf="student">
+    <div class="row border-bottom mb-3">
+        <h1>Je bekijkt Leerling '{{this.student.firstname}} {{this.student.lastname}}'</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Naam : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.student.firstname}} {{this.student.lastname}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Geboortedatum : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.student.birthdate! | date : 'dd-MM-yyyy'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Stad : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.student.city}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Straat : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.student.street}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Huisnummer : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.student.housenumber}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Postcode : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.student.postalcode}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <p><b>Zit in klas : </b></p>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <p>{{this.class!.name}} (Leeftijd: {{this.class!.age}} jaar, Tijd: {{this.class!.time}})</p>
+            <p>Klas word gegeven door:</p>
+            <ul>
+                <li *ngFor="let teacher of this.class!.teachers">{{teacher.firstname}} {{teacher.lastname}}</li>
+            </ul>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-6 ms-auto">
+            <button class="btn btn-secondary mt-2 px-4" routerLink="/student">Terug</button>
+        </div>
+    </div>
+</div>
+
+<zondagschoolapp-footer></zondagschoolapp-footer>

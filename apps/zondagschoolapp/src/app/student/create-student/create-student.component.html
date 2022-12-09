@@ -2,13 +2,10 @@
 
 <!-- New Teacher -->
 <div class="row mb-2">
-    <h2>Nieuwe Leraar</h2>
+    <h2>Nieuwe Leerling</h2>
 </div>
 
-<form [formGroup]="teacherForm" (ngSubmit)="createTeacher()">
-
-    <label class="form-label" for="emailAddress">Emailadres: </label>
-    <input class="form-control mb-2" id="emailAddress" type="text" formControlName="emailAddress">
+<form [formGroup]="studentForm" (ngSubmit)="createStudent()">
 
     <label class="form-label" for="firstName">Voornaam: </label>
     <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
@@ -31,10 +28,15 @@
     <label class="form-label" for="postalCode">Postcode: </label>
     <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
 
-    <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
+    <label class="form-label" for="inclass">Zit in klas: </label>
+    <select class="form-control mb-2" id="inclass" type="select" formControlName="inclass">
+        <option *ngFor="let class of this.classes" value="{{class._id}}">{{class.name}}</option>
+    </select>
 
-    <button class="btn btn-primary mt-2" type="submit" [disabled]="!teacherForm.valid">Toevoegen</button>
-    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Terug</button>
+    <p *ngIf="studentForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
+
+    <button class="btn btn-primary mt-2" type="submit" [disabled]="!studentForm.valid">Toevoegen</button>
+    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/student">Terug</button>
 </form>
 
 <zondagschoolapp-footer></zondagschoolapp-footer>

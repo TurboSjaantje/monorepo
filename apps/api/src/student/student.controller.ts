@@ -19,6 +19,12 @@ export class StudentController {
     return this.studentService.getOne(id);
   }
 
+  @Get('/class/:id')
+  @UseGuards(TeacherGuard)
+  async getStudentsForClass(@Param('id') id: string) {
+    return await this.studentService.getStudentsForClass(id);
+  }
+
   @Post()
   @UseGuards(TeacherGuard)
   createStudent(@Body() student: Student) {

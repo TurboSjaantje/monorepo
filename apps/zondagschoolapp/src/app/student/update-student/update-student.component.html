@@ -1,0 +1,45 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
+
+<div *ngIf="this.student && this.studentForm">
+
+    <div class="row mb-2">
+        <h2>Leerling '{{student.firstname}} {{student.lastname}}' bewerken</h2>
+    </div>
+
+    <form [formGroup]="studentForm" (ngSubmit)="updateStudent()">
+
+        <label class="form-label" for="firstName">Voornaam: </label>
+        <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
+
+        <label class="form-label" for="lastName">Achternaam: </label>
+        <input class="form-control mb-2" id="lastName" type="text" formControlName="lastName">
+
+        <label class="form-label" for="birthDate">Geboortedatum: </label>
+        <input class="form-control mb-2" id="birthDate" type="date" formControlName="birthDate">
+
+        <label class="form-label" for="city">Stad: </label>
+        <input class="form-control mb-2" id="city" type="text" formControlName="city">
+
+        <label class="form-label" for="street">Straat: </label>
+        <input class="form-control mb-2" id="street" type="text" formControlName="street">
+
+        <label class="form-label" for="houseNumber">Huisnummer: </label>
+        <input class="form-control mb-2" id="houseNumber" type="number" formControlName="houseNumber">
+
+        <label class="form-label" for="postalCode">Postcode: </label>
+        <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
+
+        <label class="form-label" for="inclass">Zit in klas: </label>
+        <select class="form-control mb-2" id="inclass" type="select" formControlName="inclass">
+            <option *ngFor="let class of this.classes" value="{{class._id}}">{{class.name}}</option>
+        </select>
+
+        <p *ngIf="studentForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
+
+        <button class="btn btn-primary mt-2" type="submit" [disabled]="!studentForm.valid">Toevoegen</button>
+        <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/student">Terug</button>
+    </form>
+
+</div>
+
+<zondagschoolapp-footer></zondagschoolapp-footer>

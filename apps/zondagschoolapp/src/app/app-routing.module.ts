@@ -17,6 +17,10 @@ import { DeleteClassComponent } from './class/delete-class/delete-class.componen
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { UserComponent } from './user/user.component';
+import { ReadStudentComponent } from './student/read-student/read-student.component';
+import { DeleteStudentComponent } from './student/delete-student/delete-student.component';
+import { CreateStudentComponent } from './student/create-student/create-student.component';
+import { UpdateStudentComponent } from './student/update-student/update-student.component';
 
 const routes: Route[] = [
 
@@ -43,6 +47,12 @@ const routes: Route[] = [
   { path: "class/read/:id", component: ReadClassComponent },
   { path: "class/create", component: CreateClassComponent },
   { path: "class/delete/:id", component: DeleteClassComponent },
+
+  //CRUD Student
+  { path: "student/read/:id", component: ReadStudentComponent },
+  { path: "student/delete/:id", component: DeleteStudentComponent },
+  { path: "student/create", component: CreateStudentComponent },
+  { path: "student/edit/:id", component: UpdateStudentComponent }
 ]
 
 @NgModule({

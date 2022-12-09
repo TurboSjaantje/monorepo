@@ -23,6 +23,13 @@ export class StudentService {
         return await this.studentModel.findById(id);
     }
 
+    async getStudentsForClass(id: string) {
+        return await this.studentModel.aggregate([
+            { $match: { inclass: id } },
+            { $sort: { firstname: 1 } }
+        ]);
+    }
+
     async createOne(student: Student) {
         return await this.ensureExists(student);
     }

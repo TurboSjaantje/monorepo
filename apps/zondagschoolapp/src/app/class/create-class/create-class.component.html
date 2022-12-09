@@ -30,6 +30,7 @@
         <p *ngIf="classForm.status == 'INVALID'" class="text-muted mt-3">Complete the form to enable button.</p>
 
         <button id="test" class="btn btn-primary mt-3" type="submit" [disabled]="!classForm.valid">Create Class</button>
+        <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/class">Terug</button>
 
     </form>
 </div>

@@ -24,7 +24,14 @@ import { DeleteClassComponent } from './class/delete-class/delete-class.componen
 import { FormsModule } from '@angular/forms';
 import { AuthGuard } from './auth.guard';
 import { UserComponent } from './user/user.component';
-import { AuthInterceptor, httpInterceptorProviders } from './login/auth.interceptor';
+import {
+  AuthInterceptor,
+  httpInterceptorProviders,
+} from './login/auth.interceptor';
+import { ReadStudentComponent } from './student/read-student/read-student.component';
+import { DeleteStudentComponent } from './student/delete-student/delete-student.component';
+import { CreateStudentComponent } from './student/create-student/create-student.component';
+import { UpdateStudentComponent } from './student/update-student/update-student.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +54,10 @@ import { AuthInterceptor, httpInterceptorProviders } from './login/auth.intercep
     UpdateClassComponent,
     DeleteClassComponent,
     UserComponent,
+    ReadStudentComponent,
+    DeleteStudentComponent,
+    CreateStudentComponent,
+    UpdateStudentComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,4 +69,4 @@ import { AuthInterceptor, httpInterceptorProviders } from './login/auth.intercep
   providers: [AuthGuard, httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

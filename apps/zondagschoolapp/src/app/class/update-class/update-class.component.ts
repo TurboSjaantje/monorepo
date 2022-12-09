@@ -66,9 +66,9 @@ export class UpdateClassComponent implements OnInit {
                 }
               }
             this.setSelectedItems(this.class!.teachers!);
+            this.fetchSelectedItems();
+            this.fetchCheckedIDs();
           })
-          this.fetchSelectedItems();
-          this.fetchCheckedIDs();
         })
       } else {
         console.log("class does not exist with id: " + this.classId);
