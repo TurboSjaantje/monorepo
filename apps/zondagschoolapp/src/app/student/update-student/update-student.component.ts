@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ClassService } from '../../class/class.service';
 import { Subject } from '../../class/subject.model';
@@ -17,6 +17,7 @@ export class UpdateStudentComponent implements OnInit {
   classes: Subject[] | undefined;
   studentId: string | undefined | null;
   student: Student | undefined;
+  dateNow = new Date(Date.now()).toISOString().split("T")[0]
 
   studentForm: FormGroup | undefined;
 
@@ -38,7 +39,7 @@ export class UpdateStudentComponent implements OnInit {
             city: ['', Validators.required],
             street: ['', Validators.required],
             houseNumber: [0, Validators.required],
-            postalCode: ['', Validators.required],
+            postalCode: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][0-9]{3}[\s][A-Za-z]{2}$/i)]),
             inclass: ['']
           })
 

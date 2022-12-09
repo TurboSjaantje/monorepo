@@ -20,7 +20,7 @@ export class AuthController {
         token: await this.authService.generateToken(credentials.emailaddress, credentials.password)
       };
     } catch (e) {
-      throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Ongeldig emailadres of wachtwoord', HttpStatus.UNAUTHORIZED);
     }
   }
 }

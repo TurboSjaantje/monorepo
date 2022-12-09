@@ -14,15 +14,17 @@ import { TeacherComponent } from '../teacher.component';
 export class CreateTeacherComponent implements OnInit {
 
   teacherForm = this.fb.group({
-    emailAddress: ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    emailAddress: new FormControl('', [Validators.required, Validators.email]),
+    firstName: ['', Validators.required, Validators.maxLength(20)],
+    lastName: ['', Validators.required, Validators.maxLength(20)],
     birthDate: ['', Validators.required],
     city: ['', Validators.required],
     street: ['', Validators.required],
     houseNumber: [0, Validators.required],
-    postalCode: ['', Validators.required]
+    postalCode: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][0-9]{3}[\s][A-Za-z]{2}$/i)])
   });
+
+  dateNow = new Date(Date.now()).toISOString().split("T")[0];
 
   constructor(private teacherService: TeacherService, private fb: FormBuilder, private router: Router) {
 
@@ -49,4 +51,5 @@ export class CreateTeacherComponent implements OnInit {
 
     this.router.navigate(['/teacher']);
   }
+
 }

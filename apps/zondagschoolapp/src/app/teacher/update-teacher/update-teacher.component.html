@@ -7,8 +7,13 @@
     <form [formGroup]="teacherForm" (ngSubmit)="updateTeacher()">
 
         <label class="form-label" for="emailAddress">Emailadres </label>
-        <input class="form-control mb-2" id="emailAddress" type="text" value={{this.teacher.emailaddress}}
+        <input
+            [class.is-invalid]="this.teacherForm.get('emailAddress')!.invalid && this.teacherForm.get('emailAddress')!.touched"
+            class="form-control mb-2" id="emailAddress" type="text" value={{this.teacher.emailaddress}}
             formControlName="emailAddress">
+        <div *ngIf="this.teacherForm.get('emailAddress')!.invalid && this.teacherForm.get('emailAddress')!.touched">
+            <small style="color: red;">Vul een geldig emailadres in!</small>
+        </div>
 
         <label class="form-label" for="firstName">Voornaam : </label>
         <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
@@ -17,7 +22,7 @@
         <input class="form-control mb-2" id="lastName" type="text" formControlName="lastName">
 
         <label class="form-label" for="birthDate">Geboortedatum : </label>
-        <input class="form-control mb-2" id="birthDate" type="date" value="2018-07-22" formControlName="birthDate">
+        <input class="form-control mb-2" id="birthDate" max="{{this.dateNow}}" type="date" formControlName="birthDate">
 
         <label class="form-label" for="city">Stad: </label>
         <input class="form-control mb-2" id="city" type="text" formControlName="city">
@@ -29,7 +34,12 @@
         <input class="form-control mb-2" id="houseNumber" type="number" formControlName="houseNumber">
 
         <label class="form-label" for="postalCode">Postcode : </label>
-        <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
+        <input
+            [class.is-invalid]="this.teacherForm.get('postalCode')!.invalid && this.teacherForm.get('postalCode')!.touched"
+            class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
+        <div *ngIf="this.teacherForm.get('postalCode')!.invalid && this.teacherForm.get('postalCode')!.touched">
+            <small style="color: red;">Vul een geldige postcode in!</small>
+        </div>
 
         <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
 

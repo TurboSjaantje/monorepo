@@ -14,7 +14,7 @@
     <input class="form-control mb-2" id="lastName" type="text" formControlName="lastName">
 
     <label class="form-label" for="birthDate">Geboortedatum: </label>
-    <input class="form-control mb-2" id="birthDate" type="date" formControlName="birthDate">
+    <input class="form-control mb-2" id="birthDate" type="date" max="{{this.dateNow}}" formControlName="birthDate">
 
     <label class="form-label" for="city">Stad: </label>
     <input class="form-control mb-2" id="city" type="text" formControlName="city">
@@ -26,7 +26,12 @@
     <input class="form-control mb-2" id="houseNumber" type="number" formControlName="houseNumber">
 
     <label class="form-label" for="postalCode">Postcode: </label>
-    <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
+    <input
+        [class.is-invalid]="this.studentForm.get('postalCode')!.invalid && this.studentForm.get('postalCode')!.touched"
+        class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
+    <div *ngIf="this.studentForm.get('postalCode')!.invalid && this.studentForm.get('postalCode')!.touched">
+        <small style="color: red;">Vul een geldige postcode in!</small>
+    </div>
 
     <label class="form-label" for="inclass">Zit in klas: </label>
     <select class="form-control mb-2" id="inclass" type="select" formControlName="inclass">

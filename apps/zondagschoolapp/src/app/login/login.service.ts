@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpException } from '@nestjs/common';
 import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Credentials, User } from './login.model';
@@ -45,7 +46,7 @@ export class LoginService {
     }
   }
 
-  login(formData: Credentials): Observable<Token | undefined> {
+  login(formData: Credentials): Observable<Token | Error> {
     return this.http.post<Token>(this.BASE_URL + "/api/login", formData, { headers: this.headers })
       .pipe(
         map((data: any) => data),
@@ -60,7 +61,7 @@ export class LoginService {
           console.log('error:', error);
           console.log('error.message:', error.message);
           console.log('error.error.message:', error.error.message);
-          return of(undefined);
+          return of(new Error(error.error.message));
         })
       );
   }

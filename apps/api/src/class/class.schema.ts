@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, ObjectId, Schema as MongooseSchema } from 'mongoose';
-import { stringify } from 'querystring';
 
 export type SubjectDocument = HydratedDocument<Subject>;
 

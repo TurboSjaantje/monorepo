@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit, LOCALE_ID, Inject, ComponentFactoryResolver } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Teacher } from '../teacher.model';
@@ -16,6 +16,7 @@ export class UpdateTeacherComponent implements OnInit {
   teacherEmailAddress: string | null | undefined;
   teacher: Teacher | undefined;
   teacherBirthDate: string | undefined;
+  dateNow = new Date(Date.now()).toISOString().split("T")[0];
 
   subscription: Subscription | undefined;
 
@@ -46,14 +47,14 @@ export class UpdateTeacherComponent implements OnInit {
         });
 
         this.teacherForm = this.fb.group({
-          emailAddress: ['', Validators.required],
+          emailAddress: new FormControl('', [Validators.required, Validators.email]),
           firstName: ['', Validators.required],
           lastName: ['', Validators.required],
           birthDate: ['', Validators.required],
           city: ['', Validators.required],
           street: ['', Validators.required],
           houseNumber: ['', Validators.required],
-          postalCode: ['', Validators.required]
+          postalCode: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][0-9]{3}[\s][A-Za-z]{2}$/i)])
         });
 
       } else {

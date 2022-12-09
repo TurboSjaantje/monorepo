@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ClassService } from '../../class/class.service';
 import { Subject } from '../../class/subject.model';
 import { Student } from '../student.model';
@@ -13,6 +13,7 @@ import { StudentService } from '../student.service';
 export class CreateStudentComponent implements OnInit {
 
   classes: Subject[] | undefined;
+  dateNow = new Date(Date.now()).toISOString().split("T")[0]
 
   studentForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -21,7 +22,7 @@ export class CreateStudentComponent implements OnInit {
     city: ['', Validators.required],
     street: ['', Validators.required],
     houseNumber: [0, Validators.required],
-    postalCode: ['', Validators.required],
+    postalCode: new FormControl('', [Validators.required, Validators.pattern(/^[1-9][0-9]{3}[\s][A-Za-z]{2}$/i)]),
     inclass: ['']
   })
 
