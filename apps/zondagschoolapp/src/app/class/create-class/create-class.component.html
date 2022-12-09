@@ -1,6 +1,12 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
+
+<div class="row">
+    <h1> Nieuwe Klas </h1>
+</div>
+
 <div *ngIf="this.teachers">
 
-    <form [formGroup]="classForm" (ngSubmit)="createClass()">
+    <form [formGroup]="classForm" (ngSubmit)="addClass()">
 
         <label class="form-label" for="name">Name: </label>
         <input class="form-control mb-2" id="name" type="text" formControlName="name">
@@ -19,13 +25,13 @@
         {{item.teacher}}
     </div>
 
-    <form [formGroup]="classForm" (ngSubmit)="createClass()">
+    <form [formGroup]="classForm" (ngSubmit)="addClass()">
 
         <p *ngIf="classForm.status == 'INVALID'" class="text-muted mt-3">Complete the form to enable button.</p>
 
-        <button id="test" class="btn btn-primary mt-3" type="submit" onclick="createClass()"
-            [disabled]="!classForm.valid">Create
-            Class</button>
+        <button id="test" class="btn btn-primary mt-3" type="submit" [disabled]="!classForm.valid">Create Class</button>
 
     </form>
 </div>
+
+<zondagschoolapp-footer></zondagschoolapp-footer>

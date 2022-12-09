@@ -1,58 +1,59 @@
 <zondagschoolapp-navbar></zondagschoolapp-navbar>
 <div *ngIf="this.teacher" class="wrapper">
     <div class="row border-bottom mb-4">
-        <h1>Update Teacher '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
+        <h1>Leraar '{{this.teacher.firstname}} {{this.teacher.lastname}}' bewerken</h1>
     </div>
 
     <form [formGroup]="teacherForm" (ngSubmit)="updateTeacher()">
 
-        <label class="form-label" for="emailAddress">Email Address: </label>
+        <label class="form-label" for="emailAddress">Emailadres </label>
         <input class="form-control mb-2" id="emailAddress" type="text" value={{this.teacher.emailaddress}}
             formControlName="emailAddress">
 
-        <label class="form-label" for="firstName">First Name: </label>
+        <label class="form-label" for="firstName">Voornaam : </label>
         <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
 
-        <label class="form-label" for="lastName">Last Name: </label>
+        <label class="form-label" for="lastName">Achternaam : </label>
         <input class="form-control mb-2" id="lastName" type="text" formControlName="lastName">
 
-        <label class="form-label" for="birthDate">Birthdate: </label>
+        <label class="form-label" for="birthDate">Geboortedatum : </label>
         <input class="form-control mb-2" id="birthDate" type="date" value="2018-07-22" formControlName="birthDate">
 
-        <label class="form-label" for="city">City: </label>
+        <label class="form-label" for="city">Stad: </label>
         <input class="form-control mb-2" id="city" type="text" formControlName="city">
 
-        <label class="form-label" for="street">Street: </label>
+        <label class="form-label" for="street">Straat: </label>
         <input class="form-control mb-2" id="street" type="text" formControlName="street">
 
-        <label class="form-label" for="houseNumber">Housenumber: </label>
+        <label class="form-label" for="houseNumber">Huisnummer : </label>
         <input class="form-control mb-2" id="houseNumber" type="number" formControlName="houseNumber">
 
-        <label class="form-label" for="postalCode">Postal Code: </label>
+        <label class="form-label" for="postalCode">Postcode : </label>
         <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
 
-        <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Complete the form to enable button.</p>
+        <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
 
         <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#updateTeacherModal"
-            id="updateTeacherInput" [disabled]="!teacherForm.valid">Update Teacher</button>
+            id="updateTeacherInput" [disabled]="!teacherForm.valid">Opslaan</button>
 
-        <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Back</button>
+        <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Terug</button>
 
 
         <div id="updateTeacherModal" class="modal" tabindex="-1">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Update</h5>
+                        <h5 class="modal-title">Bewerken</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to udpate '{{this.teacher.firstname}} {{this.teacher.lastname}}'</p>
+                        <p>Weet je zeker dat je de leraar '{{this.teacher.firstname}} {{this.teacher.lastname}}' wilt
+                            bewerken?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" routerLink="/teacher" data-bs-dismiss="modal" class="btn btn-primary">Save
-                            changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
+                        <button type="submit" routerLink="/teacher" data-bs-dismiss="modal"
+                            class="btn btn-primary">Wijzigingen opslaan</button>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <zondagschoolapp-navbar></zondagschoolapp-navbar>
 <div *ngIf="this.teachers && this.class">
 
-    <form [formGroup]="classForm" (ngSubmit)="updateClass()">
+    <form [formGroup]="classForm">
 
         <label class="form-label" for="name">Name: </label>
         <input class="form-control mb-2" id="name" type="text" formControlName="name">
@@ -24,40 +24,11 @@
 
         <p *ngIf="classForm.status == 'INVALID'" class="text-muted mt-3">Complete the form to enable button.</p>
 
-        <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#updateClassModal"
-            id="updateClassInput" [disabled]="!classForm.valid">UpdateClass</button>
+        <button class="btn btn-primary mt-3" data-bs-toggle="modal" type="submit" data-bs-target="#updateClassModal"
+            id="updateClassInput">Update Class</button>
 
         <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/class">Back</button>
-
-        <div id="updateClassModal" class="modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Update</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to update '{{this.class.name}} for children of {{this.class.age}} years
-                            old'</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" routerLink="/class" data-bs-dismiss="modal" class="btn btn-primary">Save
-                            changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </form>
 </div>
 <zondagschoolapp-footer></zondagschoolapp-footer>
-
-<script>
-    var myModal = document.getElementById('updateClassModal')
-    var myInput = document.getElementById('updateClassInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
-</script>

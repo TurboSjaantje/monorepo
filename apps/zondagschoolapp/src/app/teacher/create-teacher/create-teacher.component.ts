@@ -4,6 +4,7 @@ import { Teacher } from '../teacher.model';
 import { TeacherService } from '../teacher.service';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TeacherComponent } from '../teacher.component';
 
 @Component({
   selector: 'zondagschoolapp-create-teacher',

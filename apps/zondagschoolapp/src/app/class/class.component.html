@@ -10,13 +10,13 @@
         <thead>
             <tr scope="row">
                 <th style="width: 14%;" scope="col">#</th>
-                <th style="width: 34.5%;" scope="col">Name</th>
-                <th style="width: 36.5%;" scope="col">Age category</th>
+                <th style="width: 34.5%;" scope="col">Naam</th>
+                <th style="width: 36.5%;" scope="col">Leeftijdscategorie</th>
                 <th style="width: 16%;"></th>
             </tr>
         </thead>
         <tbody>
-            <tr routerLink="read/{{class.id}}" style="text-decoration: underline;"
+            <tr routerLink="read/{{class._id}}" style="text-decoration: underline;"
                 class="align-items-center justify-content-center" *ngFor="let class of classes; let i = index">
                 <th scope="row">{{i}}</th>
                 <td>
@@ -24,9 +24,9 @@
                 </td>
                 <td>{{ class.age }}</td>
                 <td id="lastcolumn">
-                    <button class="btn btn-primary me-2 my-1" routerLink="edit/{{class.id}}"><img
+                    <button class="btn btn-primary me-2 my-1" routerLink="edit/{{class._id}}"><img
                             src="../../../assets/images/icons8-pencil-90.png" width="25px" height="25px"></button>
-                    <button class="btn btn-primary" routerLink="delete/{{class.id}}"><img
+                    <button class="btn btn-primary" routerLink="delete/{{class._id}}"><img
                             src="../../../assets/images/icons8-remove-90.png" width="25px" height="25px"></button>
                 </td>
             </tr>
@@ -34,12 +34,6 @@
     </table>
 </div>
 
-
-<!-- New Class -->
-<div class="row mb-2">
-    <h2>New Class</h2>
-</div>
-
-<zondagschoolapp-create-class></zondagschoolapp-create-class>
+<button routerLink="/class/create" class="btn btn-primary">Nieuwe Klas</button>
 
 <zondagschoolapp-footer></zondagschoolapp-footer>

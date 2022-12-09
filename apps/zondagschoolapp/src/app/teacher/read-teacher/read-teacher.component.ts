@@ -41,6 +41,7 @@ export class ReadTeacherComponent implements OnInit {
 
         this.subscription = this.teacherService.getTeacherById(this.teacherId).subscribe(async (response) => {
           this.teacher = response;
+          console.log(JSON.stringify(this.teacher))
           this.createLoginForm.patchValue({
             emailaddress: this.teacher.emailaddress,
           })

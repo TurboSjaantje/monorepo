@@ -4,21 +4,26 @@ import mongoose, { Model, Schema } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Teacher, TeacherDocument } from './teacher.schema';
+import { UserController } from '../user/user.controller';
+import { User, UserDocument } from '../user/user.schema';
 
 @Injectable()
 export class TeacherService {
   constructor(
-    @InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>
+    @InjectModel(Teacher.name) private teacherModel: Model<TeacherDocument>,
+    @InjectModel(User.name) private userModel: Model<UserDocument>
   ) { }
 
   async ensureExists(teacher: Teacher) {
     try {
-      await this.teacherModel.create(teacher);
+      return await this.teacherModel.create(teacher);
     } catch (error) { }
   }
 
   async getAll() {
-    return this.teacherModel.find();
+    return await this.teacherModel.find(
+      { $sort: { firstname: 1 } }
+    );
   }
 
   async getById(emailaddress: string) {
@@ -27,19 +32,27 @@ export class TeacherService {
   }
 
   async addTeacher(teacher: Teacher) {
-    await this.ensureExists(teacher);
+    return await this.ensureExists(teacher);
+  }
+
+  async getMultipleTeachers(teachers: string[]) {
+    return await this.teacherModel.find({ emailaddress: { $in: teachers } });
   }
 
   async updateTeacher(emailaddress: string, teacher: Teacher) {
     const filter = { emailaddress: emailaddress };
     let oldTeacher = await this.teacherModel.findOneAndUpdate(filter, teacher, { returnOriginal: true });
-    console.log(oldTeacher.firstname);
+    await this.userModel.findOneAndUpdate({ emailaddress: oldTeacher.emailaddress }, { $set: { emailaddress: teacher.emailaddress } });
+    console.log(oldTeacher.emailaddress);
     return oldTeacher;
   }
 
   async deleteTeacher(emailaddress: string) {
     const filter = { emailaddress: emailaddress };
     let deletedTeacher = await this.teacherModel.findOneAndDelete(filter);
+    if (this.userModel.findOne(filter) != null) {
+      await this.userModel.findOneAndDelete(filter);
+    }
     return deletedTeacher;
   }
 }

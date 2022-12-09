@@ -13,25 +13,15 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   @Get()
+  @UseGuards(AdminGuard)
   getAllUsers() {
     return this.userService.getAllUsers();
   }
 
   @Get(':email')
+  @UseGuards(AdminGuard)
   getUserById(@Param('email') email: string): Promise<User> {
     return this.userService.getById(email);
-  }
-
-  @Post('/admin')
-  @UseGuards(AdminGuard)
-  sayHi2() {
-    return 'hi2';
-  }
-
-  @Post('/teacher')
-  @UseGuards(TeacherGuard)
-  sayHi() {
-    return 'hi';
   }
 
   @Post()
@@ -41,11 +31,13 @@ export class UserController {
   }
 
   @Put(':email')
+  @UseGuards(AdminGuard)
   updateUser(@Param('email') email: string, @Body() user: User): Promise<User> {
     return this.userService.updateUser(email, user);
   }
 
   @Delete(':email')
+  @UseGuards(AdminGuard)
   deleteUser(@Param('email') email: string): Promise<User> {
     return this.userService.deleteUser(email);
   }

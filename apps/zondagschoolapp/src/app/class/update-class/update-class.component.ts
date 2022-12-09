@@ -7,6 +7,7 @@ import { Teacher } from '../../teacher/teacher.model';
 import { TeacherService } from '../../teacher/teacher.service';
 import { Class } from '../class.model';
 import { ClassService } from '../class.service';
+import { Subject } from '../subject.model';
 
 export class dataListItem {
   id: string | undefined;
@@ -25,8 +26,10 @@ export class dataListItem {
   templateUrl: './update-class.component.html',
   styleUrls: ['./update-class.component.css'],
 })
+
 export class UpdateClassComponent implements OnInit {
   subscription: Subscription | undefined;
+  subscription2: Subscription | undefined;
   checkboxesDataList: dataListItem[] = [];
 
   teachers: Teacher[] | undefined;
@@ -36,49 +39,41 @@ export class UpdateClassComponent implements OnInit {
   checkedIDs: any = [];
 
   classId: string | null | undefined;
-  class: Class | undefined;
+  class: Subject | undefined;
 
   constructor(private teacherService: TeacherService, private classService: ClassService, private fb: FormBuilder, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+
     this.route.paramMap.subscribe((params) => {
       this.classId = params.get("id");
       if (this.classId) {
         console.log("class exists with id: " + this.classId);
-        this.class = this.classService.getClassById(this.classId);
+        this.subscription2 = this.classService.getClassById(this.classId).subscribe((response) => {
+          this.class = response[0];
+          this.classForm = this.fb.group({
+            name: [this.class?.name, Validators.required],
+            age: [this.class?.age, Validators.required],
+            time: [this.class?.time, Validators.required],
+          })
+          this.subscription = this.teacherService.getAllTeachers().subscribe((response) => {
+            this.teachers = response;
+
+            if (this.teachers)
+              for (let t of this.teachers) {
+                if (t.emailaddress && t.firstname && t.lastname) {
+                  this.checkboxesDataList.push(new dataListItem(t.emailaddress, t.firstname + ' ' + t.lastname, false))
+                }
+              }
+            this.setSelectedItems(this.class!.teachers!);
+          })
+          this.fetchSelectedItems();
+          this.fetchCheckedIDs();
+        })
       } else {
         console.log("class does not exist with id: " + this.classId);
       }
     })
-
-    //Subscribing to teacher from httpService
-    console.log("subscribing");
-    this.subscription = this.teacherService.getAllTeachers().subscribe((response) => {
-      this.teachers = response;
-      console.log(this.teachers);
-    })
-
-    if (this.teachers) console.log(this.teachers.length + " teachers found.");
-
-    if (this.teachers)
-      for (let t of this.teachers) {
-        if (t.emailaddress && t.firstname && t.lastname) {
-          this.checkboxesDataList.push(new dataListItem(t.emailaddress, t.firstname + ' ' + t.lastname, false))
-        }
-      }
-
-    this.classForm = this.fb.group({
-      name: [this.class?.name, Validators.required],
-      age: [this.class?.age, Validators.required],
-      time: [this.class?.time, Validators.required],
-    })
-
-    this.fetchSelectedItems();
-    this.fetchCheckedIDs();
-
-    if (this.class?.teachers) {
-      this.setSelectedItems(this.class?.teachers);
-    }
   }
 
   updateClass() {
@@ -87,15 +82,20 @@ export class UpdateClassComponent implements OnInit {
     let name = this.classForm.value.name;
     let age = this.classForm.value.age;
     let time = this.classForm.value.time;
-    let teachers = this.teacherService.getMultipleTeachersById(this.selectedItemsList);
+    let teachers;
 
-    for (let teacher of teachers) console.log(teacher.firstname + ' ' + teacher.lastname);
-
-    if (name && age && time && teachers && this.class) {
-      this.classService.updateClass(this.class, new Class(name, age, time, teachers));
+    let selectedTeachers: string[] = [];
+    for (let i of this.selectedItemsList) {
+      selectedTeachers.push(i.id!);
     }
 
-    this.classForm.reset();
+    let subscription = this.teacherService.getMultipleTeachersById(selectedTeachers).subscribe((response) => {
+      teachers = response;
+      for (let teacher of teachers) console.log(teacher.firstname + ' ' + teacher.lastname);
+      this.classService.updateClass(this.class!, new Subject(name, age, time, teachers), selectedTeachers);
+      this.classForm.reset();
+      subscription.unsubscribe();
+    });
   }
 
   changeSelection() {
@@ -130,6 +130,7 @@ export class UpdateClassComponent implements OnInit {
       console.log("unsubscribing");
       this.subscription.unsubscribe();
     }
+    if (this.subscription2) this.subscription2.unsubscribe();
   }
 
 }

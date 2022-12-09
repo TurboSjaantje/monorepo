@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map, Subscription, tap } from 'rxjs';
 import { Class } from '../class.model';
 import { ClassService } from '../class.service';
+import { Subject } from '../subject.model';
 
 @Component({
   selector: 'zondagschoolapp-read-class',
@@ -12,7 +14,8 @@ import { ClassService } from '../class.service';
 export class ReadClassComponent implements OnInit {
 
   classId: string | null | undefined;
-  class: Class | undefined;
+  class: Subject | undefined;
+  subscription: Subscription | undefined;
 
   constructor(private classService: ClassService, private route: ActivatedRoute, private router: Router) { }
 
@@ -21,7 +24,10 @@ export class ReadClassComponent implements OnInit {
       this.classId = params.get("id");
       if (this.classId) {
         console.log("class exists with id: " + this.classId);
-        this.class = this.classService.getClassById(this.classId);
+        this.subscription = this.classService.getClassById(this.classId).subscribe((response) => {
+          this.class = response[0];
+          console.log(JSON.stringify(this.class))
+        });
       } else {
         console.log("class does not exist with id: " + this.classId);
       }

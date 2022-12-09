@@ -2,11 +2,11 @@
 
 <div class="wrapper p-4 mb-5" *ngIf="teacher">
     <div class="row border-bottom mb-3">
-        <h1>Viewing teacher '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
+        <h1>Je bekijkt leraar '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Name : </b></p>
+            <p><b>Naam : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.firstname}} {{this.teacher.lastname}}</p>
@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Email Address : </b></p>
+            <p><b>Emailadres : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.emailaddress}}</p>
@@ -22,7 +22,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Birthday : </b></p>
+            <p><b>Geboortedatum : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.birthdate! | date : 'dd-MM-yyyy'}}</p>
@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>City : </b></p>
+            <p><b>Stad : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.city}}</p>
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Street : </b></p>
+            <p><b>Straat : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.street}}</p>
@@ -46,7 +46,7 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Housenumber : </b></p>
+            <p><b>Huisnummer : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.housenumber}}</p>
@@ -54,32 +54,31 @@
     </div>
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <p><b>Postalcode : </b></p>
+            <p><b>Postcode : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
             <p>{{this.teacher.postalcode}}</p>
         </div>
     </div>
     <div class="row mt-5" *ngIf="!userExists">
-        <h5><b>Create login for this teacher</b></h5>
+        <h5><b>Maak een login voor deze leraar</b></h5>
         <form [formGroup]="createLoginForm" (ngSubmit)="createUserLogin()">
-            <label class="form-label" for="emailaddress">Email Address:</label>
+            <label class="form-label" for="emailaddress">Emailadres :</label>
             <input class="form-control mb-2" id="emailaddress" [readOnly]="true" type="text"
                 formControlName="emailaddress">
 
-            <label class="form-label" for="password">Password: </label>
+            <label class="form-label" for="password">Wachtwoord: </label>
             <input class="form-control mb-2" id="password" maxlength="20" type="text" formControlName="password">
 
-            <label class="form-label" for="admin">User is admin</label>
+            <label class="form-label" for="admin">Geef deze gebruiker administrator rechten: </label>
             <input class="form-check mb-2" id="admin" type="checkbox" formControlName="admin">
 
-            <button class="btn btn-primary mt-2" type="submit" [disabled]="!createLoginForm.valid">Create
-                Teacher</button>
+            <button class="btn btn-primary mt-2" type="submit" [disabled]="!createLoginForm.valid">Aanmaken</button>
         </form>
     </div>
     <div class="row">
         <div class="col-md-2 col-sm-6 ms-auto">
-            <button class="btn btn-secondary mt-2 px-4" routerLink="/teacher">Back</button>
+            <button class="btn btn-secondary mt-2 px-4" routerLink="/teacher">Terug</button>
         </div>
     </div>
 </div>

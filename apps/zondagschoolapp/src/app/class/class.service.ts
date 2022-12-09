@@ -3,6 +3,12 @@ import { TeacherService } from '../teacher/teacher.service';
 import { Class } from './class.model';
 import { Time } from '@angular/common';
 import { DeleteClassComponent } from './delete-class/delete-class.component';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable, tap } from 'rxjs';
+import { Subject } from './subject.model';
+import { Router } from '@angular/router';
+import { subscriptionLogsToBeFn } from 'rxjs/internal/testing/TestScheduler';
 
 @Injectable({
   providedIn: 'root',
@@ -141,53 +147,62 @@ export class ClassService {
     }
   ];
 
-  constructor(private teacherService: TeacherService) {
+  BASE_URL = environment.apiUrl;
+
+  constructor(private teacherService: TeacherService, private http: HttpClient, private router: Router) {
     console.log('ClassService created!');
   }
 
-  getAllClasses(): Class[] {
-    return this.classes;
+  getAllClasses(): Observable<Subject[]> {
+    return this.http.get<Subject[]>(this.BASE_URL + '/api/class').pipe(
+      map((response: Subject[]) => response),
+      tap((classes: Subject[]) => {
+        return classes;
+      })
+    )
   }
 
-  getClassById(classId: string): Class {
-    return this.classes.filter((c) => c.id == classId)[0];
+  getClassById(classId: string): Observable<Subject[]> {
+    return this.http.get<Subject[]>(this.BASE_URL + '/api/class/' + classId).pipe(
+      map((response: Subject[]) => response),
+      tap((subject: Subject[]) => {
+        return subject[0];
+      })
+    )
   }
 
-  createClass(newClass: Class) {
-    let idIsValid = false;
-    while (!idIsValid) {
-      newClass.id =
-        this.getRandomInt(11111, 99999) +
-        '-' +
-        this.getRandomInt(111, 999) +
-        '-' +
-        this.getRandomInt(11, 99);
-
-      if (this.classes.filter((c) => c.id == newClass.id)[0] == null)
-        idIsValid = true;
+  createClass(newClass: Subject, selectedTeachers: string[]) {
+    let subject = {
+      name: newClass.name,
+      age: newClass.age,
+      time: newClass.time,
+      teachers: selectedTeachers
     }
-
-    try {
-      this.classes.push(newClass);
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(subject);
+    this.http.post<any>(this.BASE_URL + '/api/class', subject).subscribe(async (response) => {
+      await this.router.navigate(['/class']);
+    });
   }
 
-  updateClass(oldClass: Class, newClass: Class) {
-    for (const c of this.classes) {
-      if (c.id == oldClass.id) {
-        c.name = newClass.name;
-        c.time = newClass.time;
-        c.age = newClass.age;
-        c.teachers = newClass.teachers;
-      }
+  updateClass(oldClass: Subject, newClass: Subject, selectedTeachers: string[]) {
+    let subject = {
+      name: newClass.name,
+      age: newClass.age,
+      time: newClass.time,
+      teachers: selectedTeachers
     }
+    console.log(subject);
+    console.log(oldClass);
+    console.log(selectedTeachers)
+    this.http.put<any>(this.BASE_URL + '/api/class/' + oldClass._id, subject).subscribe((response) => {
+      this.router.navigate(['/class']);
+    })
   }
 
-  deleteClass(toDeleteClass: Class) {
-    const classIndex = this.classes.findIndex((c) => c.id === toDeleteClass.id);
-    this.classes.splice(classIndex, 1);
+  deleteClass(toDeleteClass: Subject) {
+    this.http.delete<any>(this.BASE_URL + '/api/class/' + toDeleteClass._id).subscribe((response) => {
+      this.router.navigate(['/class']);
+    })
   }
 
   getRandomInt(min: number, max: number) {

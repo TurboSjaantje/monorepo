@@ -6,6 +6,7 @@ import { Teacher } from '../../teacher/teacher.model';
 import { TeacherService } from '../../teacher/teacher.service';
 import { Class } from '../class.model';
 import { ClassService } from '../class.service';
+import { Subject } from '../subject.model';
 
 export class dataListItem {
   id: string | undefined;
@@ -38,41 +39,40 @@ export class CreateClassComponent implements OnInit {
   constructor(private teacherService: TeacherService, private classService: ClassService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    //Subscribing to teacher from httpService
-    console.log("subscribing");
     this.subscription = this.teacherService.getAllTeachers().subscribe((response) => {
       this.teachers = response;
+
       console.log(this.teachers);
+
       for (let t of this.teachers) {
         if (t.emailaddress && t.firstname && t.lastname) {
           this.checkboxesDataList.push(new dataListItem(t.emailaddress, t.firstname + ' ' + t.lastname, false))
         }
       }
+
       this.classForm = this.fb.group({
         name: ['', Validators.required],
         age: [0, Validators.required],
         time: ['', Validators.required],
       })
+
       this.fetchSelectedItems();
       this.fetchCheckedIDs();
     })
-
-    if (this.teachers) console.log(this.teachers.length + " teachers found.");
   }
 
-  createClass() {
-    console.log('test');
+  addClass() {
+    console.log('addClass called');
 
-    let name = this.classForm.value.name;
-    let age = this.classForm.value.age;
-    let time = this.classForm.value.time;
-    let teachers = this.teacherService.getMultipleTeachersById(this.selectedItemsList);
+    let selectedTeachers: string[] = [];
+    for (let i of this.selectedItemsList) selectedTeachers.push(i.id!);
 
-    if (name && age && time && teachers) {
-      this.classService.createClass(new Class(name, age, time, teachers));
-    }
+    let subscription = this.teacherService.getMultipleTeachersById(selectedTeachers).subscribe((response) => {
+      this.classService.createClass(new Subject(this.classForm.value.name, this.classForm.value.age, this.classForm.value.time, response), selectedTeachers);
 
-    this.classForm.reset();
+      subscription.unsubscribe();
+    })
+
   }
 
   changeSelection() {

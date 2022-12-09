@@ -31,7 +31,8 @@ export class UpdateTeacherComponent implements OnInit {
         console.log("teacher exists with email: " + this.teacherEmailAddress);
         this.subscription = this.teacherService.getTeacherById(this.teacherEmailAddress).subscribe((response) => {
           this.teacher = response;
-          this.teacherBirthDate = (formatDate(this.teacher!.birthdate!, 'yyyy/MM/dd', this.locale));
+          this.teacherBirthDate = (formatDate(this.teacher!.birthdate!, 'yyyy-MM-dd', this.locale));
+          console.log(this.teacherBirthDate);
           this.teacherForm.patchValue({
             emailAddress: this.teacher.emailaddress,
             firstName: this.teacher.firstname,

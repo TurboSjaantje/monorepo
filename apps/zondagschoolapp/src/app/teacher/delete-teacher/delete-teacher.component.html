@@ -3,17 +3,17 @@
 <div *ngIf="this.teacher" class="wrapper">
 
     <div class="row border-bottom mb-3 ms-4">
-        <h1>Deleting teacher '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
+        <h1>Verwijder leraar '{{this.teacher.firstname}} {{this.teacher.lastname}}'</h1>
     </div>
     <div class="row mb-4">
         <div class="col-sm-3 text-end">
-            <p><b>Name : </b></p>
-            <p><b>Email Address : </b></p>
-            <p><b>Birthday : </b></p>
-            <p><b>City : </b></p>
-            <p><b>Street : </b></p>
-            <p><b>Housenumber : </b></p>
-            <p><b>Postalcode : </b></p>
+            <p><b>Naam : </b></p>
+            <p><b>Emailadres : </b></p>
+            <p><b>Geboortedatum : </b></p>
+            <p><b>Stad : </b></p>
+            <p><b>Straat : </b></p>
+            <p><b>Huisnummer : </b></p>
+            <p><b>Postcode : </b></p>
         </div>
         <div class="col">
             <p>{{this.teacher.firstname}} {{this.teacher.lastname}}</p>
@@ -27,24 +27,24 @@
     </div>
 
     <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#deleteTeacherModal"
-        id="deleteTeacherInput">Delete Teacher</button>
-    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Back</button>
+        id="deleteTeacherInput">Verwijder</button>
+    <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Terug</button>
 
     <div id="deleteTeacherModal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete</h5>
+                    <h5 class="modal-title">Verwijder</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to delete '{{this.teacher.firstname}} {{this.teacher.lastname}}'</p>
+                    <p>Weet je zeker dat je leraar '{{this.teacher.firstname}} {{this.teacher.lastname}}' wilt
+                        verwijderen?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
                     <button (click)="deleteTeacher()" routerLink="/teacher" data-bs-dismiss="modal"
-                        class="btn btn-primary">Save
-                        changes</button>
+                        class="btn btn-primary">Wijzigingen opslaan</button>
                 </div>
             </div>
         </div>

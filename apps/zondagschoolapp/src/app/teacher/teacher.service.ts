@@ -4,6 +4,7 @@ import { dataListItem } from '../class/create-class/create-class.component';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, tap } from "rxjs";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,60 +14,7 @@ export class TeacherService {
 
   BASE_URL = environment.apiUrl;
 
-  teachers: Teacher[] = [
-    {
-      emailaddress: 'MarliesvanderHoek@armyspy.com',
-      firstname: 'Marlies',
-      lastname: 'van der Hoek',
-      birthdate: new Date(1964, 9, 6),
-      city: 'Amsterdam',
-      street: 'Schaepmanstraat',
-      housenumber: 84,
-      postalcode: '1051 JJ',
-    },
-    {
-      emailaddress: 'HelenevanderKamp@armyspy.com',
-      firstname: 'Helene',
-      lastname: 'van der Kamp',
-      birthdate: new Date(1970, 7, 24),
-      city: 'Waspik',
-      street: 'Van Gentstraat',
-      housenumber: 87,
-      postalcode: '5165 CV',
-    },
-    {
-      emailaddress: 'BobbyVerbeet@armyspy.com',
-      firstname: 'Bobby',
-      lastname: 'Verbeet',
-      birthdate: new Date(1965, 2, 10),
-      city: 'Velp',
-      street: 'Alteveer',
-      housenumber: 68,
-      postalcode: '6881 BG',
-    },
-    {
-      emailaddress: 'JanneterBrugge@armyspy.com',
-      firstname: 'Janne',
-      lastname: 'ter Brugge',
-      birthdate: new Date(1968, 1, 24),
-      city: 'Geleen',
-      street: 'Hoge Kanaalweg',
-      housenumber: 27,
-      postalcode: '6167 RJ',
-    },
-    {
-      emailaddress: 'IrenaMolenkamp@teleworm.us',
-      firstname: 'Irena',
-      lastname: 'Molenkamp',
-      birthdate: new Date(19676, 2, 12),
-      city: 'Gorredijk',
-      street: 'Watse Eelkesstrjitte',
-      housenumber: 75,
-      postalcode: '8401 RG',
-    },
-  ];
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     console.log('TeacherService created');
   }
 
@@ -94,12 +42,13 @@ export class TeacherService {
     );
   }
 
-  getMultipleTeachersById(teacherIds: dataListItem[]): Teacher[] {
-    let returnTeachers: Teacher[] = [];
-    for (let teacher of teacherIds) {
-      returnTeachers.push(this.teachers.filter(t => t.emailaddress == teacher.id)[0]);
-    }
-    return returnTeachers;
+  getMultipleTeachersById(teacherIds: string[] | undefined): Observable<Teacher[]> {
+    return this.http.post<Teacher[]>(this.BASE_URL + '/api/teacher/multiple', teacherIds).pipe(
+      map((response: Teacher[]) => response),
+      tap((teachers: Teacher[]) => {
+        return teachers;
+      })
+    )
   }
 
   createTeacher(newTeacher: Teacher) {
@@ -114,6 +63,7 @@ export class TeacherService {
       let response;
       this.http.post<Teacher>(teacherUrl, newTeacher).subscribe((response) => {
         response = response;
+        this.router.navigate(['/teacher']);
       });
       console.log(response)
     } else {
@@ -135,11 +85,12 @@ export class TeacherService {
     if (teacher) {
       const teacherUrl = this.BASE_URL + "/api/teacher/" + teacher.emailaddress;
       console.log("DELETE: " + teacherUrl);
+
       let deletedTeacher;
       this.http.delete(teacherUrl).subscribe((response) => {
         deletedTeacher = response;
       })
-      console.log(deletedTeacher);
+      console.log(JSON.stringify(deletedTeacher));
     }
   }
 }

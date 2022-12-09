@@ -1,35 +1,39 @@
+<zondagschoolapp-navbar></zondagschoolapp-navbar>
+
 <!-- New Teacher -->
 <div class="row mb-2">
-    <h2>New Teacher</h2>
+    <h2>Nieuwe Leraar</h2>
 </div>
 
 <form [formGroup]="teacherForm" (ngSubmit)="createTeacher()">
 
-    <label class="form-label" for="emailAddress">Email Address: </label>
+    <label class="form-label" for="emailAddress">Emailadres: </label>
     <input class="form-control mb-2" id="emailAddress" type="text" formControlName="emailAddress">
 
-    <label class="form-label" for="firstName">First Name: </label>
+    <label class="form-label" for="firstName">Voornaam: </label>
     <input class="form-control mb-2" id="firstName" type="text" formControlName="firstName">
 
-    <label class="form-label" for="lastName">Last Name: </label>
+    <label class="form-label" for="lastName">Achternaam: </label>
     <input class="form-control mb-2" id="lastName" type="text" formControlName="lastName">
 
-    <label class="form-label" for="birthDate">BirthDate: </label>
+    <label class="form-label" for="birthDate">Geboortedatum: </label>
     <input class="form-control mb-2" id="birthDate" type="date" formControlName="birthDate">
 
-    <label class="form-label" for="city">City: </label>
+    <label class="form-label" for="city">Stad: </label>
     <input class="form-control mb-2" id="city" type="text" formControlName="city">
 
-    <label class="form-label" for="street">Street: </label>
+    <label class="form-label" for="street">Straat: </label>
     <input class="form-control mb-2" id="street" type="text" formControlName="street">
 
-    <label class="form-label" for="houseNumber">Housenumber: </label>
+    <label class="form-label" for="houseNumber">Huisnummer: </label>
     <input class="form-control mb-2" id="houseNumber" type="number" formControlName="houseNumber">
 
-    <label class="form-label" for="postalCode">Postal Code: </label>
+    <label class="form-label" for="postalCode">Postcode: </label>
     <input class="form-control mb-2" id="postalCode" type="text" formControlName="postalCode">
 
-    <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Complete the form to enable button.</p>
+    <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
 
-    <button class="btn btn-primary mt-2" type="submit" [disabled]="!teacherForm.valid">Create Teacher</button>
+    <button class="btn btn-primary mt-2" type="submit" [disabled]="!teacherForm.valid">Toevoegen</button>
 </form>
+
+<zondagschoolapp-footer></zondagschoolapp-footer>

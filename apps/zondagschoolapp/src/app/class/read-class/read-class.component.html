@@ -1,5 +1,6 @@
 <zondagschoolapp-navbar></zondagschoolapp-navbar>
-<div class="wrapper p-4 mb-5" *ngIf="class">
+
+<div class="wrapper p-4 mb-5" *ngIf="this.class">
     <div class="row border-bottom mb-3">
         <h1>Viewing class '{{this.class.name}} for children of {{this.class.age}} years old'</h1>
     </div>
@@ -37,6 +38,11 @@
                     <p>{{teacher.firstname}} {{teacher.lastname}}</p>
                 </li>
             </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-6 ms-auto">
+            <button class="btn btn-secondary mt-2 px-4" routerLink="/class">Terug</button>
         </div>
     </div>
 </div>

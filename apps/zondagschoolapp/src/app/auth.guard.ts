@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
                     return admin;
                 } else {
                     console.log('not logged in, reroute to /');
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/']);
                     return false;
                 }
 
