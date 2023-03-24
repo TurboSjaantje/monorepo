@@ -3,5 +3,10 @@
     "target": "http://localhost:3333",
     "secure": false,
     "changeOrigin": true
+  },
+  "/neo-api": {
+    "target": "http://localhost:4444",
+    "secure": false,
+    "changeOrigin": true
   }
 }

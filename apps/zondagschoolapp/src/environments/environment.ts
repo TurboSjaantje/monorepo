@@ -1,5 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: ''
+  apiUrl: '',
+  neoUrl: 'http://localhost:4444'
 };
 

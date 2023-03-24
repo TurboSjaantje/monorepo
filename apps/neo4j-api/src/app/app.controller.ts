@@ -12,4 +12,10 @@ export class AppController {
 
     return `There are ${res.records[0].get('count')} nodes in the database`;
   }
+
+  @Get('subject/:subjectId')
+  async createSubject(@Param('subjectId') subjectId: string): Promise<any> {
+    const res = await this.neo4jService.write(`CREATE (subject:Subject {id: '${subjectId}'})`);
+    return res;
+  }
 }

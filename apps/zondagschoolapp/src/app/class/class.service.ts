@@ -14,140 +14,8 @@ import { subscriptionLogsToBeFn } from 'rxjs/internal/testing/TestScheduler';
   providedIn: 'root',
 })
 export class ClassService {
-  classes: Class[] = [
-    {
-      id: '12345-123-12',
-      name: 'Bijbelstudie',
-      age: 4,
-      time: '10:00',
-      teachers: [{
-        emailaddress: 'MarliesvanderHoek@armyspy.com',
-        firstname: 'Marlies',
-        lastname: 'van der Hoek',
-        birthdate: new Date(1964, 9, 6),
-        city: 'Amsterdam',
-        street: 'Schaepmanstraat',
-        housenumber: 84,
-        postalcode: '1051 JJ',
-      },
-      {
-        emailaddress: 'HelenevanderKamp@armyspy.com',
-        firstname: 'Helene',
-        lastname: 'van der Kamp',
-        birthdate: new Date(1970, 7, 24),
-        city: 'Waspik',
-        street: 'Van Gentstraat',
-        housenumber: 87,
-        postalcode: '5165 CV',
-      },]
-    },
-    {
-      id: '23456-234-23',
-      name: 'Bijbelstudie',
-      age: 5,
-      time: '10:30',
-      teachers: [{
-        emailaddress: 'MarliesvanderHoek@armyspy.com',
-        firstname: 'Marlies',
-        lastname: 'van der Hoek',
-        birthdate: new Date(1964, 9, 6),
-        city: 'Amsterdam',
-        street: 'Schaepmanstraat',
-        housenumber: 84,
-        postalcode: '1051 JJ',
-      },
-      {
-        emailaddress: 'HelenevanderKamp@armyspy.com',
-        firstname: 'Helene',
-        lastname: 'van der Kamp',
-        birthdate: new Date(1970, 7, 24),
-        city: 'Waspik',
-        street: 'Van Gentstraat',
-        housenumber: 87,
-        postalcode: '5165 CV',
-      },]
-    },
-    {
-      id: '34567-345-34',
-      name: 'Bijbelstudie',
-      age: 6,
-      time: '11:00',
-      teachers: [{
-        emailaddress: 'MarliesvanderHoek@armyspy.com',
-        firstname: 'Marlies',
-        lastname: 'van der Hoek',
-        birthdate: new Date(1964, 9, 6),
-        city: 'Amsterdam',
-        street: 'Schaepmanstraat',
-        housenumber: 84,
-        postalcode: '1051 JJ',
-      },
-      {
-        emailaddress: 'HelenevanderKamp@armyspy.com',
-        firstname: 'Helene',
-        lastname: 'van der Kamp',
-        birthdate: new Date(1970, 7, 24),
-        city: 'Waspik',
-        street: 'Van Gentstraat',
-        housenumber: 87,
-        postalcode: '5165 CV',
-      },]
-    },
-    {
-      id: '45678-456-45',
-      name: 'Bijbelstudie',
-      age: 7,
-      time: '11:30',
-      teachers: [{
-        emailaddress: 'MarliesvanderHoek@armyspy.com',
-        firstname: 'Marlies',
-        lastname: 'van der Hoek',
-        birthdate: new Date(1964, 9, 6),
-        city: 'Amsterdam',
-        street: 'Schaepmanstraat',
-        housenumber: 84,
-        postalcode: '1051 JJ',
-      },
-      {
-        emailaddress: 'HelenevanderKamp@armyspy.com',
-        firstname: 'Helene',
-        lastname: 'van der Kamp',
-        birthdate: new Date(1970, 7, 24),
-        city: 'Waspik',
-        street: 'Van Gentstraat',
-        housenumber: 87,
-        postalcode: '5165 CV',
-      },]
-    },
-    {
-      id: '56789-567-56',
-      name: 'Bijbelstudie',
-      age: 8,
-      time: '12:00',
-      teachers: [{
-        emailaddress: 'MarliesvanderHoek@armyspy.com',
-        firstname: 'Marlies',
-        lastname: 'van der Hoek',
-        birthdate: new Date(1964, 9, 6),
-        city: 'Amsterdam',
-        street: 'Schaepmanstraat',
-        housenumber: 84,
-        postalcode: '1051 JJ',
-      },
-      {
-        emailaddress: 'HelenevanderKamp@armyspy.com',
-        firstname: 'Helene',
-        lastname: 'van der Kamp',
-        birthdate: new Date(1970, 7, 24),
-        city: 'Waspik',
-        street: 'Van Gentstraat',
-        housenumber: 87,
-        postalcode: '5165 CV',
-      },]
-    }
-  ];
-
   BASE_URL = environment.apiUrl;
+  NEO_URL = environment.neoUrl;
 
   constructor(private teacherService: TeacherService, private http: HttpClient, private router: Router) {
     console.log('ClassService created!');
@@ -180,6 +48,7 @@ export class ClassService {
     }
     console.log(subject);
     this.http.post<any>(this.BASE_URL + '/api/class', subject).subscribe(async (response) => {
+      this.createClassInNeo(response)
       await this.router.navigate(['/class']);
     });
   }
@@ -209,5 +78,14 @@ export class ClassService {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  createClassInNeo(newClass: Subject) {
+    console.log('Nieuwe Class voor neo: ' + newClass._id)
+    let url = this.NEO_URL + '/neo-api/subject/' + newClass._id;
+    console.log(url)
+    this.http.get<any>(url).subscribe((response) => {
+      console.log(response);
+    })
   }
 }
