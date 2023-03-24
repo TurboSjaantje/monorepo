@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Delete, Param, Put, Post, Query } from '@nestjs/common';
 import { Neo4jService } from 'nest-neo4j';
 import { AppService } from './app.service';
 
@@ -13,9 +13,29 @@ export class AppController {
     return `There are ${res.records[0].get('count')} nodes in the database`;
   }
 
-  @Get('subject/:subjectId')
-  async createSubject(@Param('subjectId') subjectId: string): Promise<any> {
-    const res = await this.neo4jService.write(`CREATE (subject:Subject {id: '${subjectId}'})`);
+  @Post('subject/:subjectId')
+  async createSubject(@Param('subjectId') subjectId: string, @Body() subject: any): Promise<any> {
+    const res = await this.neo4jService.write(`CREATE (subject:Subject {id: '${subjectId}', name: '${subject.name}'})`);
+    return res;
+  }
+
+  @Delete('subject/:subjectId')
+  async deleteSubject(@Param('subjectId') subjectId: string): Promise<any> {
+    const res = await this.neo4jService.write(`MATCH (subject:Subject {id: '${subjectId}'}) DETACH DELETE subject`);
+    return res;
+  }
+
+  @Post('student/:studentId')
+  async createStudent(@Param('studentId') studentId: string, @Body() student: any): Promise<any> {
+    console.log(JSON.stringify(student));
+    console.log(studentId)
+    const res = await this.neo4jService.write(`CREATE (student:Student {id: '${studentId}', name: '${student.firstname} ${student.lastname}'})`);
+    return res;
+  }
+
+  @Put('subject/:subjectId')
+  async updateSubject(@Param('subjectId') subjectId: string, @Body() subject: any): Promise<any> {
+    const res = await this.neo4jService.write(`MATCH (s:Subject {id: '${subjectId}'}) SET s.name = '${subject.name}'`);
     return res;
   }
 }

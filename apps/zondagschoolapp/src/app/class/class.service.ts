@@ -60,6 +60,7 @@ export class ClassService {
       time: newClass.time,
       teachers: selectedTeachers
     }
+    this.updateClassInNeo(oldClass, subject);
     console.log(subject);
     console.log(oldClass);
     console.log(selectedTeachers)
@@ -69,6 +70,7 @@ export class ClassService {
   }
 
   deleteClass(toDeleteClass: Subject) {
+    this.deleteClassInNeo(toDeleteClass);
     this.http.delete<any>(this.BASE_URL + '/api/class/' + toDeleteClass._id).subscribe((response) => {
       this.router.navigate(['/class']);
     })
@@ -84,8 +86,27 @@ export class ClassService {
     console.log('Nieuwe Class voor neo: ' + newClass._id)
     let url = this.NEO_URL + '/neo-api/subject/' + newClass._id;
     console.log(url)
-    this.http.get<any>(url).subscribe((response) => {
+    this.http.post<any>(url, newClass).subscribe((response) => {
       console.log(response);
     })
   }
+
+  deleteClassInNeo(toDeleteClass: Subject) {
+    console.log('Delete Class voor neo: ' + toDeleteClass._id)
+    let url = this.NEO_URL + '/neo-api/subject/' + toDeleteClass._id;
+    console.log(url)
+    this.http.delete<any>(url).subscribe((response) => {
+      console.log(response);
+    })
+  }
+
+  updateClassInNeo(oldClass: Subject, newClass: any) {
+    console.log('Update Class voor neo: ' + oldClass._id)
+    let url = this.NEO_URL + '/neo-api/subject/' + oldClass._id;
+    console.log(url)
+    this.http.put<any>(url, newClass).subscribe((response) => {
+      console.log(response);
+    })
+  }
+
 }

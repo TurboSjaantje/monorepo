@@ -11,6 +11,7 @@ import { Student } from './student.model';
 export class StudentService {
 
   BASE_URL = environment.apiUrl;
+  NEO_URL = environment.neoUrl;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -44,6 +45,7 @@ export class StudentService {
   createStudent(student: Student) {
     return this.http.post<Student>(this.BASE_URL + '/api/student', student).subscribe((res) => {
       this.router.navigate(['/student'])
+      this.addStudentToNeo(res);
       return res;
     })
   }
@@ -58,6 +60,14 @@ export class StudentService {
   deleteStudent(id: string) {
     return this.http.delete<Student>(this.BASE_URL + '/api/student/' + id).subscribe((res) => {
       this.router.navigate(['/student'])
+      return res;
+    })
+  }
+
+  addStudentToNeo(student: Student) {
+    let id = student._id;
+    console.log(id)
+    return this.http.post<any>(this.NEO_URL + '/neo-api/student/' + student._id, student).subscribe((res) => {
       return res;
     })
   }
