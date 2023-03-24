@@ -32,12 +32,15 @@
     <div *ngIf="this.studentForm.get('postalCode')!.invalid && this.studentForm.get('postalCode')!.touched">
         <small style="color: red;">Vul een geldige postcode in!</small>
     </div>
+</form>
 
-    <label class="form-label" for="inclass">Zit in klas: </label>
-    <select class="form-control mb-2" id="inclass" type="select" formControlName="inclass">
-        <option *ngFor="let class of this.classes" value="{{class._id}}">{{class.name}}</option>
-    </select>
+<label class="form-label">Classes:</label>
+<div *ngFor="let item of checkboxesDataList">
+    <input type="checkbox" name="" id="" [(ngModel)]="item.isChecked" (change)="changeSelection()">
+    {{item.subject}}
+</div>
 
+<form [formGroup]="studentForm" (ngSubmit)="createStudent()">
     <p *ngIf="studentForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
 
     <button class="btn btn-primary mt-2" type="submit" [disabled]="!studentForm.valid">Toevoegen</button>

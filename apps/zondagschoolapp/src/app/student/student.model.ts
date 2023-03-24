@@ -8,9 +8,9 @@ export class Student {
     street: string | undefined;
     housenumber: number | undefined;
     postalcode: string | undefined;
-    inclass: string | undefined;
+    inclass: string[] | undefined;
 
-    constructor(firstname: string, lastname: string, birthdate: Date, city: string, street: string, housenumber: number, postalcode: string, inclass: string) {
+    constructor(firstname: string, lastname: string, birthdate: Date, city: string, street: string, housenumber: number, postalcode: string, inclass: string[]) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.birthdate = birthdate;

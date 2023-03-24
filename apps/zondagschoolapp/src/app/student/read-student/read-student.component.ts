@@ -16,7 +16,7 @@ export class ReadStudentComponent implements OnInit {
 
   studentId: string | undefined | null;
   student: Student | undefined;
-  class: Subject | undefined;
+  classes: Subject[] = [];
   subscription: Subscription | undefined;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private studentService: StudentService, private classService: ClassService) { }
@@ -27,9 +27,11 @@ export class ReadStudentComponent implements OnInit {
       if (this.studentId) {
         this.subscription = this.studentService.getStudentById(this.studentId).subscribe((res) => {
           this.student = res;
-          this.classService.getClassById(this.student.inclass!).subscribe((response) => {
-            this.class = response[0];
-          })
+          for (let c of this.student.inclass!) {
+            this.classService.getClassById(c).subscribe((response) => {
+              this.classes!.push(response[0]);
+            })
+          }
         })
       }
     })

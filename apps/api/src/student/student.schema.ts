@@ -28,7 +28,7 @@ export class Student {
     postalcode: string | undefined;
 
     @Prop()
-    inclass: string | undefined;
+    inclass: string[] | undefined;
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);

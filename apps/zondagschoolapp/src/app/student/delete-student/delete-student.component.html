@@ -57,12 +57,7 @@
             <p><b>Zit in klas : </b></p>
         </div>
         <div class="col-md-8 col-sm-12">
-            <p>{{this.class!.name}} (Leeftijd: {{this.class!.age}} jaar, Tijd: {{this.class!.time}})</p>
-            <p>Klas word gegeven door:</p>
-            <ul>
-                <li *ngFor="let teacher of this.class!.teachers">{{teacher.firstname}} {{teacher.lastname}}</li>
-            </ul>
-
+            <p *ngFor="let class of this.classes">{{class!.name}} (Leeftijd: {{class!.age}} jaar, Tijd: {{class!.time}})</p>
         </div>
     </div>
 

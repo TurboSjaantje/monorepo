@@ -43,7 +43,7 @@
 
     <p *ngIf="teacherForm.status == 'INVALID'" class="text-muted">Vul alle velden in om door te gaan</p>
 
-    <button class="btn btn-primary mt-2" type="submit" [disabled]="!teacherForm.valid">Toevoegen</button>
+    <button class="btn btn-primary mt-2" type="submit" [disabled]="!this.teacherForm.valid">Toevoegen</button>
     <button class="btn btn-secondary mt-2" style="float:right;" routerLink="/teacher">Terug</button>
 </form>
 

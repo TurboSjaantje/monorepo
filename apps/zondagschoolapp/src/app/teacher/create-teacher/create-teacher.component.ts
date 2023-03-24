@@ -11,12 +11,13 @@ import { TeacherComponent } from '../teacher.component';
   templateUrl: './create-teacher.component.html',
   styleUrls: ['./create-teacher.component.css'],
 })
+
 export class CreateTeacherComponent implements OnInit {
 
   teacherForm = this.fb.group({
     emailAddress: new FormControl('', [Validators.required, Validators.email]),
-    firstName: ['', Validators.required, Validators.maxLength(20)],
-    lastName: ['', Validators.required, Validators.maxLength(20)],
+    firstName: ['', [Validators.required, Validators.maxLength(20)]],
+    lastName: ['', [Validators.required, Validators.maxLength(20)]],
     birthDate: ['', Validators.required],
     city: ['', Validators.required],
     street: ['', Validators.required],
