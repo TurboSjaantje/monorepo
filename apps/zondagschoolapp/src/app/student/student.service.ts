@@ -51,6 +51,7 @@ export class StudentService {
   }
 
   updateStudent(id: string, student: Student) {
+    this.updateStudentInNeo(id, student);
     return this.http.put<Student>(this.BASE_URL + '/api/student/' + id, student).subscribe((res) => {
       this.router.navigate(['/student'])
       return res;
@@ -68,6 +69,12 @@ export class StudentService {
     let id = student._id;
     console.log(id)
     return this.http.post<any>(this.NEO_URL + '/neo-api/student/' + student._id, student).subscribe((res) => {
+      return res;
+    })
+  }
+
+  updateStudentInNeo(id: string, student: Student) {
+    return this.http.put<any>(this.NEO_URL + '/neo-api/student/' + id, student).subscribe((res) => {
       return res;
     })
   }

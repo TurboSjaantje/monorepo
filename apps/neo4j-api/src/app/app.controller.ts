@@ -29,8 +29,12 @@ export class AppController {
   async createStudent(@Param('studentId') studentId: string, @Body() student: any): Promise<any> {
     console.log(JSON.stringify(student));
     console.log(studentId)
-    const res = await this.neo4jService.write(`CREATE (student:Student {id: '${studentId}', name: '${student.firstname} ${student.lastname}'})`);
-    return res;
+    this.appService.createStudentWithRelationships(studentId, student);
+  }
+
+  @Put('student/:studentId')
+  async updateStudent(@Param('studentId') studentId: string, @Body() student: any): Promise<any> {
+    this.appService.updateStudentWithRelationships(studentId, student);
   }
 
   @Put('subject/:subjectId')
