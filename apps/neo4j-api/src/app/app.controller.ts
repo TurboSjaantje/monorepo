@@ -42,4 +42,10 @@ export class AppController {
     const res = await this.neo4jService.write(`MATCH (s:Subject {id: '${subjectId}'}) SET s.name = '${subject.name}'`);
     return res;
   }
+
+  @Get('recommendation/:studentId')
+  async getRecommendation(@Param('studentId') studentId: string): Promise<any> {
+    return this.appService.getRecommendationForStudent(studentId);
+  }
 }
+

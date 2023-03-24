@@ -31,6 +31,7 @@ export class UpdateStudentComponent implements OnInit {
   selectedItemsList: dataListItem[] = [];
   checkedIDs: any = [];
 
+  recommendedClasses: Subject[] = [];
   allClasses: Subject[] = [];
   studentId: string | undefined | null;
   student: Student | undefined;
@@ -52,6 +53,16 @@ export class UpdateStudentComponent implements OnInit {
           for (let c of this.allClasses) {
             this.checkboxesDataList.push(new dataListItem(c._id!, c.name!, false))
           }
+
+          let recommendationSubscription = this.studentService.getRecommendationForStudent(this.studentId!).subscribe((res) => {
+            for (let c of res) {
+              let getRecommendedClasses = this.classService.getClassById(c).subscribe((res2) => {
+                this.recommendedClasses.push(res2[0]);
+                getRecommendedClasses.unsubscribe();
+              })
+            }
+            recommendationSubscription.unsubscribe();
+          })
 
           this.studentForm = this.fb.group({
             firstName: ['', Validators.required],

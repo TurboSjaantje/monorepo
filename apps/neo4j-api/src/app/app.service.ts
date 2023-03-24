@@ -34,4 +34,12 @@ export class AppService {
     
     return res;
   }
+
+  async getRecommendationForStudent(studentId: string): Promise<any> {
+    const res = await this.neo4jService.read(`MATCH (student:Student {id: '${studentId}'})-[:IN_CLASS]-(subject:Subject)<-[:IN_CLASS]-(other:Student)
+    MATCH (other)-[:IN_CLASS]->(rec:Subject)
+    WHERE NOT (student)-[:IN_CLASS]->(rec)
+    RETURN DISTINCT rec.id`);
+    return res.records.map(record => record.get('rec.id'))
+  }
 }

@@ -78,4 +78,13 @@ export class StudentService {
       return res;
     })
   }
+
+  getRecommendationForStudent(id: string) {
+    return this.http.get<any>(this.NEO_URL + '/neo-api/recommendation/' + id).pipe(
+      map((res: any) => res),
+      tap((recommendation: any) => {
+        return recommendation;
+      })
+    )
+  }
 }

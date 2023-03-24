@@ -36,6 +36,11 @@
 
     </form>
 
+    <p class="form-label"><b>Recommended classes:</b></p>
+    <ul>
+        <li class="text-muted" *ngFor="let recommendedClass of this.recommendedClasses">{{this.recommendedClass!.name}} (Leeftijd: {{this.recommendedClass?.age}} jaar, Tijd: {{this.recommendedClass?.time}})</li>
+    </ul>
+    
     <label class="form-label">Classes:</label>
     <div *ngFor="let item of checkboxesDataList">
         <input type="checkbox" name="" id="" [(ngModel)]="item.isChecked" (change)="changeSelection()">
