@@ -6,16 +6,16 @@ export type SubjectDocument = HydratedDocument<Subject>;
 @Schema()
 export class Subject {
 
-    @Prop()
+    @Prop({ required: true, type: String })
     name: string | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: Number })
     age: number | undefined;
 
-    @Prop()
+    @Prop({ required: false, type: String })
     time: string | undefined;
 
-    @Prop()
+    @Prop({ required: false, type: [String] })
     teachers: string[] | undefined;
 
     constructor(name: string, age: number, time: string, teachers: string[]) {

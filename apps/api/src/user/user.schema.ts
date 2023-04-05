@@ -6,13 +6,13 @@ export type UserDocument = HydratedDocument<User>;
 @Schema()
 export class User {
 
-    @Prop()
+    @Prop({ required: true, type: String })
     emailaddress: string;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     password: string;
 
-    @Prop()
+    @Prop({ required: true, type: [String] })
     roles: string[];
 }
 
