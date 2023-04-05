@@ -1,12 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } from '@nestjs/common';
 import { TeacherGuard } from '../auth/teacher.guard';
-import { TeacherService } from '../teacher/teacher.service';
 import { Subject } from './class.schema';
 import { ClassService } from './class.service';
 
 @Controller('class')
 export class ClassController {
-  constructor(private readonly classService: ClassService, private readonly teacherService: TeacherService) { }
+  constructor(private readonly classService: ClassService) { }
 
   @Get()
   @UseGuards(TeacherGuard)

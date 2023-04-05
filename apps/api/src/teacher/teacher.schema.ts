@@ -6,28 +6,28 @@ export type TeacherDocument = HydratedDocument<Teacher>;
 @Schema()
 export class Teacher {
 
-    @Prop()
+    @Prop({ required: true, type: String, unique: true })
     emailaddress: string | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     firstname: string | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     lastname: string | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     birthdate: Date | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     city: string | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     street: string | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: Number })
     housenumber: number | undefined;
 
-    @Prop()
+    @Prop({ required: true, type: String })
     postalcode: string | undefined;
 }
 

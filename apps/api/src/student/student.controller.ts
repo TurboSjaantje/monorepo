@@ -16,7 +16,8 @@ export class StudentController {
   @Get(':id')
   @UseGuards(TeacherGuard)
   getStudentById(@Param('id') id: string) {
-    return this.studentService.getOne(id);
+    let student = this.studentService.getOne(id);
+    return student;
   }
 
   @Get('/class/:id')

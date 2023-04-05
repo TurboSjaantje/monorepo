@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put, UseGuards } fro
 import { TeacherService } from './teacher.service';
 import { Teacher } from './teacher.schema';
 import mongoose, { ObjectId } from 'mongoose';
-import { listenerCount } from 'events';
 import { AdminGuard } from '../auth/admin.guard';
 import { TeacherGuard } from '../auth/teacher.guard';
 
