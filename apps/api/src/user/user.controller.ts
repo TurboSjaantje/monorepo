@@ -25,7 +25,6 @@ export class UserController {
   }
 
   @Post()
-  @UseGuards(AdminGuard)
   create(@Body() user: User) {
     return this.userService.addUser(user);
   }

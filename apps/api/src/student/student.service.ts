@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Student, StudentDocument } from './student.schema';
@@ -10,7 +10,9 @@ export class StudentService {
     async ensureExists(student: Student) {
         try {
             return await this.studentModel.create(student);
-        } catch (error) { }
+        } catch (error) { 
+            return new BadRequestException(error);
+        }
     }
 
     async getAll() {
@@ -31,6 +33,7 @@ export class StudentService {
     }
 
     async createOne(student: Student) {
+        console.log(student)
         return await this.ensureExists(student);
     }
 
