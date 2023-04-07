@@ -21,6 +21,10 @@ jobs:
           npx nx build zondagschoolapp
           npx nx build api
           npx nx build neo4j-api
+      - uses: actions/upload-artifact@v3
+        with: 
+          name: zondagschoolapp
+          path: "./dist/apps/zondagschoolapp"
       
   run-npx-nx-test: 
     name: Run Tests
