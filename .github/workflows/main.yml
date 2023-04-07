@@ -30,9 +30,9 @@ jobs:
         with:
             fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
-      - run: npm ci
-
-      - run: npx nx test api
+      - run: | 
+          npm ci
+          npx nx test api
       
   
   
