@@ -28,8 +28,6 @@ jobs:
     needs: run-npx-nx-build
     steps:
       - uses: actions/checkout@v2
-        with:
-            fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
       - run: | 
           npm ci
