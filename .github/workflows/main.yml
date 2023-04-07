@@ -1,42 +1,37 @@
-name: Deploy to Railway
-
-on:
+name: Testing And Deploying
+on: 
   push:
-    branches: [main]
-
+    branches: 
+      - main
+  pull_request:
+  
 jobs:
-  deploy:
+  run-npx-nx-build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - uses: nrwl/nx-set-shas@v3
-      - run: npm ci
-      - run: npx nx build api
+      - name: npx nx install and build the website
+        run: |
+          npm ci
+          npx nx build zondagschoolapp
+          npx nx build api
+          npx nx build neo4j-api
       
-      - name: Install Nix 
-      - run: brew install railwayapp/tap/nixpacks
-      - run: nixpacks build ./dist/apps --name api
-
-      - name: Use Node 12
-        uses: actions/setup-node@v1
+  run-npx-nx-test: 
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
         with:
-          node-version: 12.x
+            fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
+      - run: npm ci
 
-      - name: Install packages
-        run: npx nx install --frozen-lockfile
+      - run: npx nx test api
+      
+  
+  
 
-      - name: Run tests
-        run: npx nx test api
-
-      - name: Install Railway
-        run: npm i -g @railway/cli
-
-      - name: Deploy
-        run: railway up
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-          NIXPACKS_NX_APP_NAME: api
