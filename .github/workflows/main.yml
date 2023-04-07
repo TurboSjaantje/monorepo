@@ -24,6 +24,7 @@ jobs:
   run-npx-nx-test: 
     name: Run Tests
     runs-on: ubuntu-latest
+    needs: run-npx-nx-build
     steps:
       - uses: actions/checkout@v2
         with:
