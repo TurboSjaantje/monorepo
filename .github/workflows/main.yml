@@ -21,7 +21,7 @@ jobs:
           node-version: 12.x
 
       - name: Install packages
-        run: yarn install --frozen-lockfile
+        run: npx nx install --frozen-lockfile
 
       - name: Run tests
         run: npx nx test api
@@ -33,3 +33,4 @@ jobs:
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          NIXPACKS_NX_APP_NAME: api
