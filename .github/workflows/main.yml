@@ -27,12 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: run-npx-nx-build
     steps:
-      - uses: actions/checkout@v2
-      - uses: nrwl/nx-set-shas@v3
+      - uses: actions/checkout@v3
       - run: | 
-          npm ci
-          npm i
-          npx nx test api
+          npm install --force
+          npm test api
       
   
   
