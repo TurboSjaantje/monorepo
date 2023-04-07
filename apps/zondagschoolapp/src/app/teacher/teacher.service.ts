@@ -94,3 +94,5 @@ export class TeacherService {
     }
   }
 }
+export { Teacher };
+
