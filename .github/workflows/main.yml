@@ -17,6 +17,7 @@ jobs:
       - name: npx nx install and build the website
         run: |
           npm ci
+          npm i
           npx nx build zondagschoolapp
           npx nx build api
           npx nx build neo4j-api
@@ -32,6 +33,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v3
       - run: | 
           npm ci
+          npm i
           npx nx test api
       
   
