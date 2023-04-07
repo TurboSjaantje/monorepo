@@ -31,6 +31,28 @@ jobs:
       - run: | 
           npm install --force
           npm test api
+          
+  netlify-deploy:
+    name: Deploy Applications
+    runs-on: ubuntu-latest
+    needs: run-npx-nx-test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: zondagschoolapp
+          path: "./dist/apps/zondagschoolapp"
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with: 
+          publish-dir: "./dist/apps/zondagschoolapp"
+          production-branch: main
+          enable-commit-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
       
   
   
